@@ -42,13 +42,13 @@ class LightsAdapter(val listener: LightsAdapterListener) : RecyclerView.Adapter<
 
         fun bindLight(light: Light) {
             with(light) {
-                view.lightNameView.text = light.location
+                view.lightNameView.text = light.name
                 view.lightToggleSwitch.isChecked = light.power
                 view.lightToggleSwitch.setOnCheckedChangeListener{ buttonView, isChecked -> listener.onToggle(light,isChecked)  }
-                /*view.lightSeekBar.progress = light.state.bri
+                view.lightSeekBar.progress = light.brightness
                 view.lightSeekBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
                     override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
-                        light.state.bri = p1
+                        light.brightness = p1
                         listener.onBrighnessChange(light,p1)
                     }
 
@@ -59,7 +59,10 @@ class LightsAdapter(val listener: LightsAdapterListener) : RecyclerView.Adapter<
                     override fun onStopTrackingTouch(p0: SeekBar?) {
                         //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                     }
-                } )*/
+                } )
+                view.setOnClickListener({
+                    listener.onClick(light)
+                })
             }
         }
     }

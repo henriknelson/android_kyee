@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import nu.cliffords.android_kyee.Adapters.LightsAdapter
 import nu.cliffords.android_kyee.Interfaces.LightsAdapterListener
 import nu.cliffords.android_kyee.R
@@ -49,14 +50,22 @@ class LightsFragment : Fragment() {
 
        private val lightsAdapter: LightsAdapter = LightsAdapter(object: LightsAdapterListener {
         override fun onToggle(light: Light, state: Boolean) {
-            light.setPower(state,{ json ->
-                Log.d("kYee",json)
+            light.setPower(state, Light.LightEffect.SUDDEN,1000,{ json ->
+                //Log.d("android_khue",json.toString())
             })
-            //bridge.setLightState(lightId = light.lightId, on=state,brightness = light.state.bri, transitiontime = 1, listener = { json -> })
         }
 
         override fun onBrighnessChange(light: Light, brightness: Int) {
-            //bridge.setLightState(lightId = light.lightId, brightness = brightness, transitiontime = 1, listener = { json -> })
+            light.setBrightness(brightness, Light.LightEffect.SMOOTH,30,{ json ->
+                //Log.d("android_khue",json.toString())
+            })
+        }
+
+        override fun onClick(light: Light) {
+            light.getBrightness { brightness ->
+                Toast.makeText(context, brightness.toString(), Toast.LENGTH_SHORT).show()
+                Log.d("android_kyee", brightness.toString())
+            }
         }
     })
 

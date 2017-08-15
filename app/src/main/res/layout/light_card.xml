@@ -45,7 +45,7 @@
             android:id="@+id/lightSeekBar"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:max="254"
+            android:max="100"
             tools:layout_editor_absoluteX="39dp"
             tools:layout_editor_absoluteY="40dp"
             card_view:layout_constraintTop_toBottomOf="@+id/lightNameView"

@@ -8,4 +8,5 @@ import nu.cliffords.kyee.Light
 interface LightsAdapterListener {
     fun onToggle(light: Light, state: Boolean)
     fun onBrighnessChange(light: Light, brightness: Int)
+    fun onClick(light: Light)
 }
