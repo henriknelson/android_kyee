@@ -1,1 +1,2 @@
-include ':app'
+include ':app', ':kYee'
+project(':kYee').projectDir = new File('kYee-library')

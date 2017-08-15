@@ -1,0 +1,3 @@
+[submodule "kYee-library"]
+	path = kYee-library
+	url = https://github.com/henriknelson/kYee.git
