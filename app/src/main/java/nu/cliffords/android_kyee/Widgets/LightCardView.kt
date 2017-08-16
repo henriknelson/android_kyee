@@ -55,9 +55,9 @@ class LightCardView(context: Context) : RelativeLayout(context), LightStateChang
                 //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
         })
-        setOnClickListener({
+        changeColorBtn.setOnClickListener {
             cardListener!!.onClick(cardLight!!)
-        })
+        }
     }
 
     override fun onStateChanged(params: Map<String, Any>) {

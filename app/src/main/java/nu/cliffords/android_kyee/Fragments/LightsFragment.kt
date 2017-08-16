@@ -26,6 +26,7 @@ import nu.cliffords.kyee.classes.LightManager
 class LightsFragment : Fragment() {
 
     val lightManager: LightManager = LightManager.instance
+    var refreshView: SwipeRefreshLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,15 +41,9 @@ class LightsFragment : Fragment() {
         val rootView = inflater?.inflate(R.layout.fragment_lights, container, false)
 
         //Initialize swipe-to-refresh view
-        val refreshView: SwipeRefreshLayout? = rootView?.findViewById(R.id.refreshView)
+        refreshView = rootView?.findViewById(R.id.refreshView)
         refreshView?.setOnRefreshListener {
-            lightsAdapter.clearLights()
-            lightManager.getLights({ lights ->
-                lights.forEach {  light ->
-                    lightsAdapter.addLight(light)
-                }
-                refreshView.setRefreshing(false);
-            })
+            updateLights()
         }
 
         //Initialize group list view
@@ -61,10 +56,25 @@ class LightsFragment : Fragment() {
         return rootView
     }
 
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        updateLights()
+    }
+
+    fun updateLights() {
+        lightsAdapter.clearLights()
+        lightManager.getLights({ lights ->
+            lights.forEach {  light ->
+                lightsAdapter.addLight(light)
+            }
+            refreshView!!.setRefreshing(false);
+        })
+    }
+
        private val lightsAdapter: LightsAdapter = LightsAdapter(object: LightViewListener {
         override fun onToggle(light: Light, state: Boolean) {
-            light.setPower(state, Light.LightEffect.SUDDEN,1000,{ json ->
-                //Log.d("android_khue",json.toString())
+            light.setPower(state, Light.LightEffect.SUDDEN,1000, { json ->
+
             })
         }
 
@@ -80,16 +90,12 @@ class LightsFragment : Fragment() {
                     .with(context)
                     .setTitle("Välj färg")
                     .initialColor(Color.WHITE)
-                    .wheelType(ColorPickerView.WHEEL_TYPE.CIRCLE)
+                    .wheelType(ColorPickerView.WHEEL_TYPE.FLOWER)
                     .density(12)
-                    .setOnColorSelectedListener { selectedColor ->
+                    .lightnessSliderOnly()
+                    .setOnColorChangedListener { selectedColor ->
                         val pixelHSV = FloatArray(3)
-                        /*
-                      * pixelHSV[0] : Hue (0 .. 360)
-                      * pixelHSV[1] : Saturation (0...1)
-                      * pixelHSV[2] : Value (0...1)
-                      */
-                        val newColor = Color.colorToHSV(selectedColor,pixelHSV)
+                        Color.colorToHSV(selectedColor,pixelHSV)
                         light.setHSV(pixelHSV[0].toInt(),(pixelHSV[1]*100).toInt(),Light.LightEffect.SMOOTH,100,{
 
                         })

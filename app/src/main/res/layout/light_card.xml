@@ -12,52 +12,66 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"></LinearLayout>
+        android:orientation="horizontal">
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        card_view:layout_constraintBottom_toBottomOf="@+id/nameView"
-        card_view:layout_constraintTop_toBottomOf="@+id/nameView">
+     <RelativeLayout
+         android:layout_width="wrap_content"
+         android:layout_height="fill_parent">
+        <RelativeLayout
+            android:id="@+id/changeColorBtn"
+            android:clickable="true"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/round_button"
+            tools:context=".MainActivity">
 
-        <TextView
-            android:id="@+id/lightNameView"
-            android:layout_width="wrap_content"
-            android:layout_height="19dp"
-            android:text="TextView"
-            tools:layout_editor_absoluteY="7dp"
-            tools:layout_editor_absoluteX="16dp"
-            card_view:layout_constraintTop_toTopOf="parent"
-            card_view:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="7dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="63dp"
-            card_view:layout_constraintBottom_toTopOf="@+id/lightSeekBar" />
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerInParent="true"
+                card_view:srcCompat="@drawable/ic_lightbulb" />
+        </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="235dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/lightNameView"
+                android:layout_width="wrap_content"
+                android:layout_height="14dp"
+                android:layout_marginTop="21dp"
+                android:text="TextView"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+
+            <SeekBar
+                android:id="@+id/lightSeekBar"
+                style="@android:style/Widget.Material.Light.SeekBar"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:max="100"
+                tools:layout_editor_absoluteY="105dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:paddingBottom="5dp"/>
+
+        </RelativeLayout>
 
         <Switch
             android:id="@+id/lightToggleSwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginEnd="16dp"
-            card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintStart_toEndOf="@+id/lightSeekBar"
-            card_view:layout_constraintTop_toTopOf="parent"
-            card_view:layout_constraintHorizontal_bias="1.0"
-            card_view:layout_constraintVertical_bias="0.505" />
+            android:layout_weight="2" />
 
-        <SeekBar
-            android:id="@+id/lightSeekBar"
-            android:layout_width="289dp"
-            android:layout_height="12dp"
-            android:layout_marginStart="40dp"
-            android:max="100"
-            card_view:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="101dp"
-            card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@+id/lightNameView"
-            android:layout_marginBottom="7dp" />
-
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
 
 </android.support.v7.widget.CardView>
