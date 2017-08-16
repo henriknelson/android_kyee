@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import nu.cliffords.android_kyee.Fragments.AboutFragment
 import nu.cliffords.android_kyee.Fragments.LightsFragment
+import nu.cliffords.kyee.classes.LightManager
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -49,6 +50,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 supportFragmentManager.beginTransaction().replace(R.id.frame_container,LightsFragment()).commit()
             }
             R.id.nav_settings -> {
+
             }
             R.id.nav_about -> {
                 supportFragmentManager.beginTransaction().replace(R.id.frame_container,AboutFragment()).addToBackStack("about_fragment").commit()
