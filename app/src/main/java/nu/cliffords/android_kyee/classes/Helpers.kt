@@ -88,7 +88,7 @@ class Helpers {
             } else x
         }
 
-        private fun getIntFromColor(Red: Int, Green: Int, Blue: Int): Int {
+        fun getIntFromColor(Red: Int, Green: Int, Blue: Int): Int {
             var Red = Red
             var Green = Green
             var Blue = Blue
@@ -96,7 +96,8 @@ class Helpers {
             Green = Green shl 8 and 0x0000FF00 //Shift Green 8-bits and mask out other stuff
             Blue = Blue and 0x000000FF //Mask out anything not blue.
 
-            return 0xFF000000.toInt() or Red or Green or Blue //0xFF000000 for 100% Alpha. Bitwise OR everything together.
+            val retValue = 0x000000.toInt() or Red or Green or Blue //0xFF000000 for 100% Alpha. Bitwise OR everything together.
+            return retValue
         }
 
 

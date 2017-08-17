@@ -56,4 +56,8 @@ class SetColorButton @JvmOverloads constructor(
         }
     }
 
+    fun setButtonBackgroundRGB(color: Int){
+        setButtonBackground(color or 0xFF000000.toInt())
+    }
+
 }

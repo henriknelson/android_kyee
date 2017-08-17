@@ -14,8 +14,8 @@ import nu.cliffords.android_kyee.classes.Helpers
 import nu.cliffords.kyee.classes.Light
 import nu.cliffords.kyee.interfaces.LightStateChangeListener
 import com.afollestad.materialdialogs.MaterialDialog
+import  nu.cliffords.kyee.classes.FlowState
 import android.text.InputType
-
 
 /**
  * Created by Henrik Nelson on 2017-08-15.
@@ -76,16 +76,29 @@ class LightCardView(context: Context) : RelativeLayout(context), LightStateChang
         changeColorBtn.setOnClickListener {
             val colorPickerDialog = buildColorPickerDialog()
             colorPickerDialog.setOnColorChangedListener { selectedColor ->
+                /*val newColor = selectedColor and 0x00FFFFFF.toInt()
+                cardLight!!.setRGB(newColor,Light.LightEffect.SMOOTH,100, {
+
+                })*/
                 val pixelHSV = FloatArray(3)
                 Color.colorToHSV(selectedColor,pixelHSV)
                 light.setHSV(pixelHSV[0].toInt(),(pixelHSV[1]*100).toInt(),Light.LightEffect.SMOOTH,100,{
-                    //changeColorBtn.setButtonBackground(selectedColor)
+                    changeColorBtn.setButtonBackground(selectedColor)
                 })
             }.build().show()
         }
 
         this.setOnClickListener {
-            Toast.makeText(context,"Light clicked",Toast.LENGTH_SHORT).show()
+
+            //Test
+            val redColor = Helpers.getIntFromColor(255,0,0)
+            val blueColor = Helpers.getIntFromColor(0,0,255)
+            val flowOne = FlowState(200, FlowState.FlowStateMode.COLOR,redColor,100)
+            val flowTwo = FlowState(200,FlowState.FlowStateMode.COLOR,blueColor,100)
+            val flows = arrayListOf<FlowState>(flowOne,flowTwo)
+            cardLight!!.startColorFlow(400, Light.FlowStopAction.LED_STAY,flows,{
+
+            })
         }
     }
 
@@ -109,7 +122,7 @@ class LightCardView(context: Context) : RelativeLayout(context), LightStateChang
 
         if(cardLight!!.color_mode == 1) {
             if (cardLight!!.rgb != null) {
-                changeColorBtn.setButtonBackground(cardLight!!.rgb!!)
+                changeColorBtn.setButtonBackgroundRGB(cardLight!!.rgb!!)
             }
         }
         else if(cardLight!!.color_mode == 2) {
