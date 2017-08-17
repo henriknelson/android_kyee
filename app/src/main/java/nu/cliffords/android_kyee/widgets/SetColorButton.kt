@@ -10,6 +10,7 @@ import android.view.MotionEvent
 import android.util.Log
 import android.widget.ImageView
 import android.graphics.PorterDuff
+import android.widget.TextView
 
 
 /**
@@ -24,21 +25,14 @@ class SetColorButton @JvmOverloads constructor(
 ) : RelativeLayout(context, attrs, defStyle, defStyleRes){
 
     var clickListener: OnClickListener? = null
-    val myImageView = ImageView(context)
+    var myImageView: ImageView? = null
 
     init {
         val rootView = LayoutInflater.from(context).inflate(R.layout.color_button,this,true)
         this.isClickable = true
 
-        val myDrawable = context.resources.getDrawable(R.drawable.ic_lightbulb)
-        myImageView.setImageDrawable(myDrawable)
-        addView(myImageView)
+        myImageView = findViewById(R.id.imgLightBulbView)
 
-        val lp = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT)
-        lp.addRule(RelativeLayout.CENTER_IN_PARENT)
-        myImageView.layoutParams = lp
-        myImageView.layoutParams.height = 115
-        myImageView.layoutParams.width = 115
     }
 
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
@@ -55,10 +49,7 @@ class SetColorButton @JvmOverloads constructor(
 
     fun setButtonBackground(color: Int){
         try {
-            val myDrawable = context.resources.getDrawable(R.drawable.ic_lightbulb)
-            myDrawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
-            myImageView.setImageDrawable(myDrawable)
-            Log.i("android_kyee","puss")
+            myImageView!!.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
 
         }catch (e:Exception){
             Log.e("android_kyee","Could not set color button color")

@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import android.widget.SeekBar
+import android.widget.Toast
 import com.flask.colorpicker.ColorPickerView
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder
 import kotlinx.android.synthetic.main.light_card.view.*
@@ -12,6 +13,9 @@ import nu.cliffords.android_kyee.R
 import nu.cliffords.android_kyee.classes.Helpers
 import nu.cliffords.kyee.classes.Light
 import nu.cliffords.kyee.interfaces.LightStateChangeListener
+import com.afollestad.materialdialogs.MaterialDialog
+import android.text.InputType
+
 
 /**
  * Created by Henrik Nelson on 2017-08-15.
@@ -31,9 +35,19 @@ class LightCardView(context: Context) : RelativeLayout(context), LightStateChang
 
         lightNameView.setOnClickListener {
             val name = ""
-            /*cardLight!!.setName("Datorrum - skrivbord",{
-
-            })*/
+            MaterialDialog.Builder(context)
+                    .title("Choose device name")
+                    .inputType(InputType.TYPE_CLASS_TEXT)
+                    .input("", cardLight!!.name, MaterialDialog.InputCallback { dialog, input ->
+                        val newName = input.toString()
+                        if(!newName.equals(cardLight!!.name)) {
+                            cardLight!!.setName(newName,{
+                                cardLight!!.name = newName
+                                lightNameView.text = newName
+                            })
+                            dialog.dismiss()
+                        }
+                    }).show()
         }
 
         lightToggleSwitch.setOnCheckedChangeListener { _, isChecked ->
@@ -65,9 +79,13 @@ class LightCardView(context: Context) : RelativeLayout(context), LightStateChang
                 val pixelHSV = FloatArray(3)
                 Color.colorToHSV(selectedColor,pixelHSV)
                 light.setHSV(pixelHSV[0].toInt(),(pixelHSV[1]*100).toInt(),Light.LightEffect.SMOOTH,100,{
-                    changeColorBtn.setButtonBackground(selectedColor)
+                    //changeColorBtn.setButtonBackground(selectedColor)
                 })
             }.build().show()
+        }
+
+        this.setOnClickListener {
+            Toast.makeText(context,"Light clicked",Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -89,17 +107,24 @@ class LightCardView(context: Context) : RelativeLayout(context), LightStateChang
         if(cardLight!!.brightness!=null)
             lightSeekBar.progress = cardLight!!.brightness!!
 
-        if(cardLight!!.color_mode == 3) {
+        if(cardLight!!.color_mode == 1) {
+            if (cardLight!!.rgb != null) {
+                changeColorBtn.setButtonBackground(cardLight!!.rgb!!)
+            }
+        }
+        else if(cardLight!!.color_mode == 2) {
+            if (cardLight!!.ct != null) {
+                val newColor = Helpers.getRGBFromK(cardLight!!.ct!!)
+                changeColorBtn.setButtonBackground(newColor)
+            }
+        }
+        else if(cardLight!!.color_mode == 3) {
 
             if ((cardLight!!.hue != null) && (cardLight!!.saturation != null)) {
-                val newColor = Helpers.ColorToHSV(cardLight!!.hue!!.toFloat(),(cardLight!!.saturation!!.toFloat() / 100),3.0F)
+                val newColor = Helpers.HsvToColor(cardLight!!.hue!!.toFloat(),(cardLight!!.saturation!!.toFloat() / 100),3.0F)
                 changeColorBtn.setButtonBackground(newColor)
             }
 
-        }else if(cardLight!!.color_mode == 1) {
-            if (cardLight!!.rgb != null) {
-                changeColorBtn.setButtonBackground(cardLight!!.rgb!! and 0xFFFFFF )
-            }
         }
     }
 

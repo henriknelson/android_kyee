@@ -35,5 +35,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.0'
     compile 'com.github.QuadFlask:colorpicker:0.0.13'
     compile 'com.kyleduo.switchbutton:library:1.4.6'
+    compile 'com.afollestad.material-dialogs:core:0.9.4.6'
     compile project(":kYee")
 }
