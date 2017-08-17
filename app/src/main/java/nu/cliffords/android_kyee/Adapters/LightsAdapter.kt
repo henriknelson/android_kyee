@@ -29,7 +29,8 @@ class LightsAdapter(val listener: LightViewListener) : RecyclerView.Adapter<Ligh
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.bindLight(lightsList[position])
+        val light = lightsList[position]
+        holder.bindLight(light)
     }
 
     override fun getItemCount() = lightsList.count()
@@ -39,7 +40,6 @@ class LightsAdapter(val listener: LightViewListener) : RecyclerView.Adapter<Ligh
         fun bindLight(light: Light) {
             with(light) {
                 light.registerStateListener(lightView)
-                lightView.setLightViewListener(listener)
                 lightView.setLight(light)
             }
         }

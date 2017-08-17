@@ -1,9 +1,14 @@
 package nu.cliffords.android_kyee.Widgets
 
 import android.content.Context
+import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import android.widget.SeekBar
+import android.widget.Toast
+import com.flask.colorpicker.ColorPickerView
+import com.flask.colorpicker.builder.ColorPickerDialogBuilder
 import kotlinx.android.synthetic.main.light_card.view.*
 import nu.cliffords.android_kyee.Interfaces.LightViewListener
 import nu.cliffords.android_kyee.R
@@ -17,47 +22,105 @@ import nu.cliffords.kyee.interfaces.LightStateChangeListener
 class LightCardView(context: Context) : RelativeLayout(context), LightStateChangeListener {
 
     var cardLight: Light? = null
-    var cardListener: LightViewListener? = null
 
     init {
-        val rootView = LayoutInflater.from(context).inflate(R.layout.light_card,this,true)
-    }
-
-    fun setLightViewListener(listener: LightViewListener) {
-        cardListener = listener
+        LayoutInflater.from(context).inflate(R.layout.light_card,this,true)
     }
 
     fun setLight(light:Light) {
         cardLight = light
         updateGui()
+
+        lightNameView.setOnClickListener {
+            val name = ""
+            /*cardLight!!.setName("Datorrum - skrivbord",{
+
+            })*/
+        }
+
+        lightToggleSwitch.setOnCheckedChangeListener { _, isChecked ->
+            cardLight!!.setPower(isChecked,Light.LightEffect.SMOOTH,500,{
+
+            })
+        }
+
+        lightSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(brightnessSeekBar: SeekBar?, brightness: Int, p2: Boolean) {
+
+            }
+
+            override fun onStartTrackingTouch(p0: SeekBar?) {
+                //Nuffin'
+            }
+
+            override fun onStopTrackingTouch(p0: SeekBar?) {
+                val brightness = p0!!.progress
+                cardLight!!.setBrightness(brightness,Light.LightEffect.SUDDEN,30,{
+
+                })
+            }
+        })
+
+        changeColorBtn.setOnClickListener {
+            val colorPickerDialog = buildColorPickerDialog()
+            colorPickerDialog.setOnColorChangedListener { selectedColor ->
+                val pixelHSV = FloatArray(3)
+                Color.colorToHSV(selectedColor,pixelHSV)
+                light.setHSV(pixelHSV[0].toInt(),(pixelHSV[1]*100).toInt(),Light.LightEffect.SMOOTH,100,{
+                    changeColorBtn.setButtonBackground(selectedColor)
+                })
+            }.build().show()
+        }
     }
 
     fun updateGui() {
 
-        if((cardLight == null) || (cardListener == null))
+        Log.i("android_kyee","Updating GUI for light view")
+
+        if(cardLight == null)
             return
 
+        //Light name
         lightNameView.text = cardLight!!.name
-        lightToggleSwitch.isChecked = cardLight!!.power
-        lightToggleSwitch.setOnCheckedChangeListener { buttonView, isChecked -> cardListener!!.onToggle(cardLight!!, isChecked) }
-        lightSeekBar.progress = cardLight!!.brightness
-        lightSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
-                cardLight!!.brightness = p1
-                cardListener!!.onBrighnessChange(cardLight!!, p1)
+        if(lightNameView.text.isEmpty())
+            lightNameView.text = "Unknown"
+
+        //Light toggle state
+        if(cardLight!!.power!=null)
+            lightToggleSwitch.isChecked = cardLight!!.power!!
+
+        //Light brightness
+        if(cardLight!!.brightness!=null)
+            lightSeekBar.progress = cardLight!!.brightness!!
+
+        if(cardLight!!.color_mode == 3) {
+
+            if ((cardLight!!.hue != null) && (cardLight!!.saturation != null)) {
+                val pixelHSV = FloatArray(3)
+                pixelHSV[0] = cardLight!!.hue!!.toFloat()
+                pixelHSV[1] = (cardLight!!.saturation!!.toFloat() / 100)
+                pixelHSV[2] = 3.0F
+                val newColor = Color.HSVToColor(pixelHSV)
+                changeColorBtn.setButtonBackground(newColor)
             }
 
-            override fun onStartTrackingTouch(p0: SeekBar?) {
-                //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }else if(cardLight!!.color_mode == 1) {
+            if (cardLight!!.rgb != null) {
+                changeColorBtn.setButtonBackground(cardLight!!.rgb!! and 0xFFFFFF )
             }
-
-            override fun onStopTrackingTouch(p0: SeekBar?) {
-                //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-        })
-        changeColorBtn.setOnClickListener {
-            cardListener!!.onClick(cardLight!!)
         }
+    }
+
+    fun buildColorPickerDialog(): ColorPickerDialogBuilder {
+        val colorPickerDialog =
+                ColorPickerDialogBuilder
+                        .with(context)
+                        .setTitle("Välj färg")
+                        .initialColor(Color.WHITE)
+                        .wheelType(ColorPickerView.WHEEL_TYPE.FLOWER)
+                        .density(12)
+                        .lightnessSliderOnly()
+        return colorPickerDialog
     }
 
     override fun onStateChanged(params: Map<String, Any>) {
