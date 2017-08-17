@@ -1,17 +1,15 @@
-package nu.cliffords.android_kyee.Widgets
+package nu.cliffords.android_kyee.widgets
 
 import android.content.Context
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import android.widget.SeekBar
-import android.widget.Toast
 import com.flask.colorpicker.ColorPickerView
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder
 import kotlinx.android.synthetic.main.light_card.view.*
-import nu.cliffords.android_kyee.Interfaces.LightViewListener
 import nu.cliffords.android_kyee.R
+import nu.cliffords.android_kyee.classes.Helpers
 import nu.cliffords.kyee.classes.Light
 import nu.cliffords.kyee.interfaces.LightStateChangeListener
 
@@ -75,8 +73,6 @@ class LightCardView(context: Context) : RelativeLayout(context), LightStateChang
 
     fun updateGui() {
 
-        Log.i("android_kyee","Updating GUI for light view")
-
         if(cardLight == null)
             return
 
@@ -96,11 +92,7 @@ class LightCardView(context: Context) : RelativeLayout(context), LightStateChang
         if(cardLight!!.color_mode == 3) {
 
             if ((cardLight!!.hue != null) && (cardLight!!.saturation != null)) {
-                val pixelHSV = FloatArray(3)
-                pixelHSV[0] = cardLight!!.hue!!.toFloat()
-                pixelHSV[1] = (cardLight!!.saturation!!.toFloat() / 100)
-                pixelHSV[2] = 3.0F
-                val newColor = Color.HSVToColor(pixelHSV)
+                val newColor = Helpers.ColorToHSV(cardLight!!.hue!!.toFloat(),(cardLight!!.saturation!!.toFloat() / 100),3.0F)
                 changeColorBtn.setButtonBackground(newColor)
             }
 

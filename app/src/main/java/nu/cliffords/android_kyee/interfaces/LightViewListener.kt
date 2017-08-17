@@ -1,4 +1,4 @@
-package nu.cliffords.android_kyee.Interfaces
+package nu.cliffords.android_kyee.interfaces
 
 import nu.cliffords.kyee.classes.Light
 

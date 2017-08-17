@@ -1,4 +1,4 @@
-package nu.cliffords.android_kyee.Widgets
+package nu.cliffords.android_kyee.widgets
 
 import android.content.Context
 import android.util.AttributeSet
@@ -6,27 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.RelativeLayout
 import nu.cliffords.android_kyee.R
-import android.R.attr.onClick
-import android.view.KeyEvent
-import android.view.KeyEvent.KEYCODE_ENTER
-import android.view.KeyEvent.KEYCODE_DPAD_CENTER
 import android.view.MotionEvent
-import android.R.attr.onClick
-import android.graphics.Color
-import android.graphics.drawable.GradientDrawable
 import android.util.Log
-import kotlinx.android.synthetic.main.color_button.view.*
-import nu.cliffords.android_kyee.R.id.imageView
-import android.support.v4.content.ContextCompat
-import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.PaintDrawable
-import android.graphics.drawable.ShapeDrawable
-import android.graphics.drawable.shapes.Shape
 import android.widget.ImageView
-import android.R.attr.name
 import android.graphics.PorterDuff
-import android.graphics.drawable.Drawable
-import org.jetbrains.anko.backgroundDrawable
 
 
 /**

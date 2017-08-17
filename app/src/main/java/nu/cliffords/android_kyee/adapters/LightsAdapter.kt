@@ -1,9 +1,9 @@
-package nu.cliffords.android_kyee.Adapters
+package nu.cliffords.android_kyee.adapters
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
-import nu.cliffords.android_kyee.Interfaces.LightViewListener
-import nu.cliffords.android_kyee.Widgets.LightCardView
+import nu.cliffords.android_kyee.interfaces.LightViewListener
+import nu.cliffords.android_kyee.widgets.LightCardView
 import nu.cliffords.kyee.classes.Light
 
 /**
@@ -16,7 +16,6 @@ class LightsAdapter(val listener: LightViewListener) : RecyclerView.Adapter<Ligh
 
     fun addLight(light: Light){
         lightsList.add(light)
-        notifyDataSetChanged()
     }
 
     fun clearLights(){

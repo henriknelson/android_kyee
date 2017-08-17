@@ -8,9 +8,8 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import nu.cliffords.android_kyee.Fragments.AboutFragment
-import nu.cliffords.android_kyee.Fragments.LightsFragment
-import nu.cliffords.kyee.classes.LightManager
+import nu.cliffords.android_kyee.fragments.AboutFragment
+import nu.cliffords.android_kyee.fragments.LightsFragment
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 

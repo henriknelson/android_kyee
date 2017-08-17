@@ -1,20 +1,18 @@
-package nu.cliffords.android_kyee.Fragments
+package nu.cliffords.android_kyee.fragments
 
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.graphics.ColorUtils
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.flask.colorpicker.ColorPickerView
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder
-import nu.cliffords.android_kyee.Adapters.LightsAdapter
-import nu.cliffords.android_kyee.Interfaces.LightViewListener
+import nu.cliffords.android_kyee.adapters.LightsAdapter
+import nu.cliffords.android_kyee.interfaces.LightViewListener
 import nu.cliffords.android_kyee.R
 import nu.cliffords.kyee.classes.Light
 import nu.cliffords.kyee.classes.LightManager
@@ -27,15 +25,6 @@ class LightsFragment : Fragment() {
 
     val lightManager: LightManager = LightManager.instance
     var refreshView: SwipeRefreshLayout? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onDestroy() {
-        //lightManager.unregisterListener(this)
-        super.onDestroy()
-    }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater?.inflate(R.layout.fragment_lights, container, false)
@@ -68,6 +57,7 @@ class LightsFragment : Fragment() {
                 lightsAdapter.addLight(light)
             }
             refreshView!!.setRefreshing(false);
+            lightsAdapter.notifyDataSetChanged()
         })
     }
 
