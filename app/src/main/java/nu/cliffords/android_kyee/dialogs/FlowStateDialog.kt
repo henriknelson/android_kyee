@@ -39,8 +39,11 @@ class FlowStateDialog private constructor(context: Context) {
 
     init {
         val flowStateView = context.layoutInflater.inflate(R.layout.dialog_create_flowstate,null)
+
         flowDurationEditText = flowStateView?.findViewById(R.id.input_flow_duration)
+
         flowModeSpinner = flowStateView?.findViewById(R.id.spinner_flow_mode)
+
         selectFlowColorBtn = flowStateView?.findViewById(R.id.button_select_flow_color)
         selectFlowColorBtn?.setOnClickListener {
             ColorPickerDialogBuilder
@@ -56,9 +59,12 @@ class FlowStateDialog private constructor(context: Context) {
                     }.build()
                     .show()
         }
+
         setFlowBrightnessSeekbar = flowStateView?.findViewById(R.id.seekbar_flow_brightness)
+
         val saveBtn = flowStateView?.findViewById<Button>(R.id.btn_save)
         saveBtn?.setOnClickListener { this.onSaveButtonClick() }
+
         builder.setView(flowStateView)
     }
 

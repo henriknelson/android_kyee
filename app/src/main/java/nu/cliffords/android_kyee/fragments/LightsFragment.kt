@@ -38,19 +38,20 @@ class LightsFragment : Fragment() {
         return rootView
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onStart() {
+        super.onStart()
         updateLights()
     }
 
+
     fun updateLights() {
-        lightsAdapter.clearLights()
         lightManager.getLights({ lights ->
+            lightsAdapter.clearLights()
             lights.forEach {  light ->
                 lightsAdapter.addLight(light)
             }
-            refreshView!!.setRefreshing(false);
             lightsAdapter.notifyDataSetChanged()
+            refreshView!!.setRefreshing(false);
         })
     }
 

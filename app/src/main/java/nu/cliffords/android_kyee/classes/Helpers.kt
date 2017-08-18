@@ -1,6 +1,8 @@
 package nu.cliffords.android_kyee.classes
 
 import android.graphics.Color
+import android.support.v4.app.Fragment
+import org.jetbrains.anko.bundleOf
 
 /**
  * Created by Henrik Nelson on 2017-08-17.
@@ -9,6 +11,10 @@ import android.graphics.Color
 class Helpers {
 
     companion object {
+
+        inline fun <reified T : Fragment> instanceOf(vararg params: Pair<String, Any>) = T::class.java.newInstance().apply {
+            arguments = bundleOf(*params)
+        }
 
         fun getRGBFromK(temperature: Int): Int {
             // Used this: https://gist.github.com/paulkaplan/5184275 at the beginning

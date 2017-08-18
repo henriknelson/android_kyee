@@ -13,7 +13,6 @@ import nu.cliffords.android_kyee.classes.Helpers
 import nu.cliffords.kyee.classes.Light
 import nu.cliffords.kyee.interfaces.LightStateChangeListener
 import com.afollestad.materialdialogs.MaterialDialog
-import  nu.cliffords.kyee.classes.FlowState
 import android.text.InputType
 
 /**
@@ -88,16 +87,7 @@ class LightCardView(context: Context) : RelativeLayout(context), LightStateChang
         }
 
         this.setOnClickListener {
-
-            //Test
-            val redColor = Helpers.getIntFromColor(255,0,0)
-            val blueColor = Helpers.getIntFromColor(0,0,255)
-            val flowOne = FlowState(200, FlowState.FlowStateMode.COLOR,redColor,100)
-            val flowTwo = FlowState(200,FlowState.FlowStateMode.COLOR,blueColor,100)
-            val flows = arrayListOf<FlowState>(flowOne,flowTwo)
-            cardLight!!.startColorFlow(400, Light.FlowStopAction.LED_STAY,flows,{
-
-            })
+            //TODO
         }
     }
 

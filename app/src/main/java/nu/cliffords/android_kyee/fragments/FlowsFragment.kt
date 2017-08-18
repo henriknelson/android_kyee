@@ -6,14 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import nu.cliffords.android_kyee.R
-import android.content.Intent
 import android.support.design.widget.FloatingActionButton
-import android.util.Log
 import android.widget.LinearLayout
-import android.widget.Toast
-import com.jmedeisis.draglinearlayout.DragLinearLayout
-import nu.cliffords.android_kyee.classes.Helpers
-import nu.cliffords.android_kyee.database.Flow
 import nu.cliffords.android_kyee.database.FlowDatabase
 import nu.cliffords.android_kyee.widgets.FlowCard
 
