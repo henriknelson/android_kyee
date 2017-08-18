@@ -5,10 +5,9 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import android.widget.SeekBar
-import android.widget.Toast
 import com.flask.colorpicker.ColorPickerView
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder
-import kotlinx.android.synthetic.main.light_card.view.*
+import kotlinx.android.synthetic.main.card_light_view.view.*
 import nu.cliffords.android_kyee.R
 import nu.cliffords.android_kyee.classes.Helpers
 import nu.cliffords.kyee.classes.Light
@@ -26,7 +25,7 @@ class LightCardView(context: Context) : RelativeLayout(context), LightStateChang
     var cardLight: Light? = null
 
     init {
-        LayoutInflater.from(context).inflate(R.layout.light_card,this,true)
+        LayoutInflater.from(context).inflate(R.layout.card_light_view,this,true)
     }
 
     fun setLight(light:Light) {

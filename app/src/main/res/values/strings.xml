@@ -1,8 +1,16 @@
 <resources>
     <string name="app_name">kYee</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">Settings</string>
+    <string-array name="flow_actions">
+        <item>Recover to previous state</item>
+        <item>Keep last state</item>
+        <item>Turn off</item>
+    </string-array>
+    <string-array name="flow_mode">
+        <item>Color</item>
+        <item>Color Temperature</item>
+        <item>Sleep</item>
+    </string-array>
 </resources>

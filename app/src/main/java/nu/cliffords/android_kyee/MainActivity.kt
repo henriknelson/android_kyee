@@ -9,6 +9,7 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import nu.cliffords.android_kyee.fragments.AboutFragment
+import nu.cliffords.android_kyee.fragments.FlowsFragment
 import nu.cliffords.android_kyee.fragments.LightsFragment
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -48,8 +49,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_home -> {
                 supportFragmentManager.beginTransaction().replace(R.id.frame_container,LightsFragment()).commit()
             }
-            R.id.nav_settings -> {
-
+            R.id.nav_flows -> {
+                supportFragmentManager.beginTransaction().replace(R.id.frame_container,FlowsFragment()).addToBackStack("flows_fragment").commit()
             }
             R.id.nav_about -> {
                 supportFragmentManager.beginTransaction().replace(R.id.frame_container,AboutFragment()).addToBackStack("about_fragment").commit()

@@ -1,23 +1,20 @@
 package nu.cliffords.android_kyee.widgets
 
 import android.content.Context
+import android.graphics.PorterDuff
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
+import android.widget.ImageView
 import android.widget.RelativeLayout
 import nu.cliffords.android_kyee.R
-import android.view.MotionEvent
-import android.util.Log
-import android.widget.ImageView
-import android.graphics.PorterDuff
-import android.widget.TextView
-
 
 /**
- * Created by Henrik Nelson on 2017-08-16.
+ * Created by Henrik Nelson on 2017-08-18.
  */
-
-class SetColorButton @JvmOverloads constructor(
+class SelectColorButton @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null,
         defStyle: Int = 0,
@@ -28,9 +25,11 @@ class SetColorButton @JvmOverloads constructor(
     var myImageView: ImageView? = null
 
     init {
-        LayoutInflater.from(context).inflate(R.layout.color_button,this,true)
+        LayoutInflater.from(context).inflate(R.layout.select_color_button,this,true)
         this.isClickable = true
-        myImageView = findViewById(R.id.imgLightBulbView)
+
+        myImageView = findViewById(R.id.imgSelectLightBulbView)
+
     }
 
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
@@ -48,15 +47,13 @@ class SetColorButton @JvmOverloads constructor(
     fun setButtonBackground(color: Int){
         try {
             myImageView!!.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
-
         }catch (e:Exception){
-            Log.e("android_kyee","Could not set color button color")
+            Log.e("android_kyee","Could not select color button color")
         }
     }
 
     fun setButtonBackgroundRGB(color: Int){
         setButtonBackground(color or 0xFF000000.toInt())
-        this.invalidate()
     }
 
 }
