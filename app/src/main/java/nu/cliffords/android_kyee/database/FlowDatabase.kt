@@ -10,13 +10,14 @@ import android.content.Context
  */
 @Database(entities = arrayOf(Flow::class), version = 1)
 abstract class FlowDatabase : RoomDatabase() {
+
     abstract fun flowDao(): FlowDao
 
     companion object {
         private var INSTANCE: FlowDatabase? = null
         @JvmStatic fun getDatabase(context: Context): FlowDatabase {
             if (INSTANCE == null) {
-                INSTANCE = Room.inMemoryDatabaseBuilder(context.applicationContext, FlowDatabase::class.java).allowMainThreadQueries().build()
+                INSTANCE = Room.databaseBuilder(context.applicationContext, FlowDatabase::class.java,"android_kyee").allowMainThreadQueries().build()
             }
             return INSTANCE!!
         }

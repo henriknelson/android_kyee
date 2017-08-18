@@ -1,5 +1,6 @@
 package nu.cliffords.android_kyee.database
 
+import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 
@@ -8,21 +9,15 @@ import android.arch.persistence.room.PrimaryKey
  */
 
 
-@Entity(tableName = "flow")
-class Flow {
+@Entity(tableName = "flows")
+class Flow(
+    @ColumnInfo(name="name") var name: String = "",
+    @ColumnInfo(name="count") var count: Int = 0,
+    @ColumnInfo(name="action") var action: Int = 0,
+    @ColumnInfo(name="flow_states") var flow_states: String = ""
+    ) {
 
-    /*class FlowState {
-        var duration: Int = 0
-        var mode: Int = 0
-        var value: Int = 0
-        var brightness: Int = 0
-    }*/
-
-    @PrimaryKey//(autoGenerate = true)
+    @PrimaryKey(autoGenerate = true)
     var id: Int = 0
-    var name: String = ""
-    var count: Int = 0
-    var action: Int = 0
-    var flow_expression: Int = 0
 
 }

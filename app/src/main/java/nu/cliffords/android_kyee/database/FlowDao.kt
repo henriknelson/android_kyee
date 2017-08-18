@@ -12,8 +12,11 @@ import android.arch.persistence.room.Query
 @Dao
 interface FlowDao {
 
-    @Query("SELECT * FROM flow")
+    @Query("SELECT * FROM flows")
     fun getAll(): List<Flow>
+
+    @Insert
+    fun insertFlow(flow:Flow)
 
     @Insert
     fun insertAll(vararg flows: Flow)

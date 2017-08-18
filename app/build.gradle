@@ -40,7 +40,7 @@ dependencies {
     compile 'com.kyleduo.switchbutton:library:1.4.6'
     compile 'com.afollestad.material-dialogs:core:0.9.4.6'
     compile 'com.jmedeisis:draglinearlayout:1.1.0'
-    debugCompile 'com.amitshekhar.android:debug-db:1.0.1'
+    //debugCompile 'com.amitshekhar.android:debug-db:1.0.1'
 
     // room persistence dependency
     compile "android.arch.persistence.room:runtime:1.0.0-alpha1"

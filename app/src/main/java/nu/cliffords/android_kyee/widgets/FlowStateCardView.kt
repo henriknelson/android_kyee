@@ -6,30 +6,49 @@ import android.widget.RelativeLayout
 import android.widget.Toast
 import kotlinx.android.synthetic.main.card_flow_state_view.view.*
 import nu.cliffords.android_kyee.R
+import nu.cliffords.android_kyee.dialogs.FlowStateDialog
 import nu.cliffords.kyee.classes.FlowState
 import nu.cliffords.kyee.classes.Light
 
 /**
  * Created by Henrik Nelson on 2017-08-18.
  */
-class FlowCardView(context: Context) : RelativeLayout(context){
+
+
+//Represents a card view that displays the configuration of one single flow state
+class FlowStateCardView(context: Context) : RelativeLayout(context){
 
     var cardFlowState: FlowState? = null
+
+    constructor(context: Context, flowState: FlowState): this(context) {
+        setFlowState(flowState)
+    }
 
     init {
         LayoutInflater.from(context).inflate(R.layout.card_flow_state_view,this,true)
         this.isClickable = true
         setOnClickListener {
-            Toast.makeText(context,this.toString(),Toast.LENGTH_SHORT).show()
+            FlowStateDialog
+                    .with(context)
+                    .setTitle("Redigera Flow")
+                    .setDuration(cardFlowState?.duration!!)
+                    .setMode(cardFlowState?.mode!!)
+                    .setValue(cardFlowState?.value!!)
+                    .setBrightness(cardFlowState?.brightness!!)
+                    .setOnClickListener { flowState ->
+                        setFlowState(flowState)
+                    }
+                    .build()
+                    .show()
         }
     }
 
-    fun setFlowState(flowState: FlowState) {
+    private fun setFlowState(flowState: FlowState) {
         cardFlowState = flowState
         updateGUI()
     }
 
-    fun updateGUI() {
+    private fun updateGUI() {
         if(cardFlowState == null)
             return
 
@@ -54,7 +73,7 @@ class FlowCardView(context: Context) : RelativeLayout(context){
             FlowState.FlowStateMode.SLEEP -> flowMode = 7
         }
 
-        return "${cardFlowState!!.duration},$flowMode,${cardFlowState!!.value},${cardFlowState!!.brightness}}"
+        return "${cardFlowState!!.duration},$flowMode,${cardFlowState!!.value},${cardFlowState!!.brightness}"
 
     }
 

@@ -84,25 +84,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
             <com.jmedeisis.draglinearlayout.DragLinearLayout
                 android:id="@+id/flowsList"
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@id/flowsDescription"
-                android:backgroundTint="#FF0000"/>
-            </ScrollView>
+                android:backgroundTint="#FF0000" />
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/createFlowStateBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:src="@drawable/ic_add_flow"
                 android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_margin="@dimen/fab_margin"
-                android:src="@drawable/ic_add_flow" />
+                android:layout_alignParentEnd="true" />
         </RelativeLayout>
 
     </LinearLayout>

@@ -3,7 +3,6 @@ package nu.cliffords.android_kyee.dialogs
 import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Color
-import android.util.Log
 import nu.cliffords.android_kyee.R
 import org.jetbrains.anko.layoutInflater
 import android.widget.*
@@ -11,12 +10,14 @@ import com.flask.colorpicker.ColorPickerView
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder
 import nu.cliffords.android_kyee.widgets.SelectColorButton
 import nu.cliffords.kyee.classes.FlowState
-import nu.cliffords.kyee.classes.Light
 
 
 /**
  * Created by Henrik Nelson on 2017-08-18.
  */
+
+//Dialog to use when one wants to either create or modify a flow state
+//Set a onSaveBtnClickListener to receive callback of how the new/modified state looks like
 class FlowStateDialog private constructor(context: Context) {
 
     val builder: AlertDialog.Builder = AlertDialog.Builder(context, 0);
@@ -28,9 +29,7 @@ class FlowStateDialog private constructor(context: Context) {
     var colorValue: Int = 0
 
     var alertDialog: AlertDialog? = null
-    var saveListener: ((FlowState) -> Unit) = {}
-
-
+    var onSaveButtonClickListener: ((FlowState) -> Unit) = {}
 
     companion object {
         fun with(context: Context): FlowStateDialog {
@@ -49,7 +48,7 @@ class FlowStateDialog private constructor(context: Context) {
                     .setTitle("Välj färg")
                     .initialColor(Color.WHITE)
                     .wheelType(ColorPickerView.WHEEL_TYPE.CIRCLE)
-                    .density(12)
+                    .density(10)
                     .lightnessSliderOnly()
                     .setOnColorChangedListener { selectedColor ->
                         colorValue = selectedColor and 0x00FFFFFF
@@ -68,8 +67,33 @@ class FlowStateDialog private constructor(context: Context) {
         return this
     }
 
+    fun setDuration(duration: Int) : FlowStateDialog {
+        flowDurationEditText?.setText(duration.toString())
+        return this
+    }
+
+    fun setMode(mode: FlowState.FlowStateMode) : FlowStateDialog {
+        when(mode) {
+            FlowState.FlowStateMode.COLOR -> flowModeSpinner?.setSelection(0)
+            FlowState.FlowStateMode.COLOR_TEMPERATURE -> flowModeSpinner?.setSelection(1)
+            FlowState.FlowStateMode.SLEEP -> flowModeSpinner?.setSelection(2)
+        }
+        return this
+    }
+
+    fun setValue(value: Int): FlowStateDialog {
+        colorValue = value
+        selectFlowColorBtn!!.setButtonBackgroundRGB(colorValue)
+        return this
+    }
+
+    fun setBrightness(brightness: Int): FlowStateDialog {
+        setFlowBrightnessSeekbar?.progress = brightness
+        return this
+    }
+
     fun setOnClickListener(listener: (FlowState) -> Unit): FlowStateDialog {
-        this.saveListener = listener
+        this.onSaveButtonClickListener = listener
         return this
     }
 
@@ -94,7 +118,7 @@ class FlowStateDialog private constructor(context: Context) {
         val colorValue = colorValue
         val brightness = if (setFlowBrightnessSeekbar != null) setFlowBrightnessSeekbar?.progress else 100
         val flowState = FlowState(if(duration != null) duration else 0,flowMode,colorValue,if(brightness != null) brightness else 100)
-        saveListener(flowState)
+        onSaveButtonClickListener(flowState)
         alertDialog?.dismiss()
     }
 
