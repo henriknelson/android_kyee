@@ -22,7 +22,7 @@ import nu.cliffords.kyee.classes.LightManager
 class FlowCard(context: Context, val flow: Flow) : RelativeLayout(context){
 
     var nameView: TextView? = null
-    var editFlowButton: SetColorButton? = null
+    var editFlowButton: RoundButton? = null
 
     init {
         val rootView = LayoutInflater.from(context).inflate(R.layout.card_flow_view,this,true)

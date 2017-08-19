@@ -10,39 +10,31 @@ import android.view.MotionEvent
 import android.util.Log
 import android.widget.ImageView
 import android.graphics.PorterDuff
-import android.widget.TextView
-
+import android.graphics.drawable.Drawable
+import android.content.res.TypedArray
 
 /**
  * Created by Henrik Nelson on 2017-08-16.
  */
 
-class SetColorButton @JvmOverloads constructor(
+class RoundButton @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null,
         defStyle: Int = 0,
         defStyleRes: Int = 0
 ) : RelativeLayout(context, attrs, defStyle, defStyleRes){
 
-    var clickListener: OnClickListener? = null
-    var myImageView: ImageView? = null
+    private var myImageView: ImageView? = null
 
     init {
-        LayoutInflater.from(context).inflate(R.layout.color_button,this,true)
+        LayoutInflater.from(context).inflate(R.layout.button_round,this,true)
         this.isClickable = true
-        myImageView = findViewById(R.id.imgLightBulbView)
-    }
-
-    override fun dispatchTouchEvent(event: MotionEvent): Boolean {
-        if(event.getAction() == MotionEvent.ACTION_UP) {
-            if(clickListener != null)
-                clickListener!!.onClick(this);
+        myImageView = findViewById(R.id.imgRoundButton)
+        if(attrs != null) {
+            val attributes = getContext().obtainStyledAttributes(attrs,R.styleable.RoundButton)
+            val myDrawable = attributes.getDrawable(R.styleable.RoundButton_android_drawable)
+            myImageView?.setImageDrawable(myDrawable)
         }
-        return super.dispatchTouchEvent(event);
-    }
-
-    override fun setOnClickListener(listener: View.OnClickListener?) {
-        this.clickListener = listener
     }
 
     fun setButtonBackground(color: Int){

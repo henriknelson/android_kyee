@@ -8,7 +8,7 @@ import org.jetbrains.anko.layoutInflater
 import android.widget.*
 import com.flask.colorpicker.ColorPickerView
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder
-import nu.cliffords.android_kyee.widgets.SelectColorButton
+import nu.cliffords.android_kyee.widgets.RectangleButton
 import nu.cliffords.kyee.classes.FlowState
 
 
@@ -23,7 +23,7 @@ class FlowStateDialog private constructor(context: Context) {
     val builder: AlertDialog.Builder = AlertDialog.Builder(context, 0);
     var flowDurationEditText: EditText? = null
     var flowModeSpinner: Spinner? = null
-    var selectFlowColorBtn: SelectColorButton? = null
+    var selectFlowColorBtn: RectangleButton? = null
     var setFlowBrightnessSeekbar: SeekBar? = null
 
     var colorValue: Int = 0

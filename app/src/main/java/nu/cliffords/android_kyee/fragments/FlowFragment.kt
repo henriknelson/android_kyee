@@ -38,7 +38,7 @@ class FlowFragment(): Fragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater?.inflate(R.layout.fragment_flow, container, false)
         setupGUI(rootView)
-        if(arguments.getInt("id") != null) {
+        if(arguments?.getInt("id") != null) {
             val id = arguments.getInt("id")
             val flowToChange = FlowDatabase.getDatabase(context).flowDao().get(id)
             setFlow(flowToChange)

@@ -5,8 +5,6 @@ import android.graphics.PorterDuff
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import nu.cliffords.android_kyee.R
@@ -14,34 +12,26 @@ import nu.cliffords.android_kyee.R
 /**
  * Created by Henrik Nelson on 2017-08-18.
  */
-class SelectColorButton @JvmOverloads constructor(
+
+class RectangleButton @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null,
         defStyle: Int = 0,
         defStyleRes: Int = 0
 ) : RelativeLayout(context, attrs, defStyle, defStyleRes){
 
-    var clickListener: OnClickListener? = null
-    var myImageView: ImageView? = null
+    private var myImageView: ImageView? = null
 
     init {
-        LayoutInflater.from(context).inflate(R.layout.select_color_button,this,true)
+        LayoutInflater.from(context).inflate(R.layout.button_rectangle,this,true)
         this.isClickable = true
-
-        myImageView = findViewById(R.id.imgSelectLightBulbView)
-
-    }
-
-    override fun dispatchTouchEvent(event: MotionEvent): Boolean {
-        if(event.getAction() == MotionEvent.ACTION_UP) {
-            if(clickListener != null)
-                clickListener!!.onClick(this);
+        myImageView = findViewById(R.id.imgRectangleButton)
+        if(attrs != null) {
+            val attributes = getContext().obtainStyledAttributes(attrs,R.styleable.RectangleButton)
+            val myDrawable = attributes.getDrawable(R.styleable.RectangleButton_android_drawable)
+            myImageView?.setImageDrawable(myDrawable)
         }
-        return super.dispatchTouchEvent(event);
-    }
 
-    override fun setOnClickListener(listener: View.OnClickListener?) {
-        this.clickListener = listener
     }
 
     fun setButtonBackground(color: Int){

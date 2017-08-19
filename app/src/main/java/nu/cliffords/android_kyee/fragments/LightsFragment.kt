@@ -38,8 +38,8 @@ class LightsFragment : Fragment() {
         return rootView
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         updateLights()
     }
 
