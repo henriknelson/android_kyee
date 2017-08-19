@@ -9,7 +9,8 @@ import android.widget.*
 import com.flask.colorpicker.ColorPickerView
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder
 import nu.cliffords.android_kyee.widgets.RectangleButton
-import nu.cliffords.kyee.classes.FlowState
+import nu.cliffords.kyee.classes.Flow.FlowState
+import org.intellij.lang.annotations.Flow
 
 
 /**
@@ -18,6 +19,7 @@ import nu.cliffords.kyee.classes.FlowState
 
 //Dialog to use when one wants to either create or modify a flow state
 //Set a onSaveBtnClickListener to receive callback of how the new/modified state looks like
+
 class FlowStateDialog private constructor(context: Context) {
 
     val builder: AlertDialog.Builder = AlertDialog.Builder(context, 0);
@@ -32,8 +34,17 @@ class FlowStateDialog private constructor(context: Context) {
     var onSaveButtonClickListener: ((FlowState) -> Unit) = {}
 
     companion object {
+        //Only way to instantiate..
         fun with(context: Context): FlowStateDialog {
             return FlowStateDialog(context)
+        }
+
+        fun with(context: Context, flowState: FlowState) : FlowStateDialog {
+            return FlowStateDialog(context)
+                .setDuration(flowState.duration!!)
+                .setMode(flowState.mode!!)
+                .setValue(flowState.value!!)
+                .setBrightness(flowState.brightness!!)
         }
     }
 
@@ -73,31 +84,6 @@ class FlowStateDialog private constructor(context: Context) {
         return this
     }
 
-    fun setDuration(duration: Int) : FlowStateDialog {
-        flowDurationEditText?.setText(duration.toString())
-        return this
-    }
-
-    fun setMode(mode: FlowState.FlowStateMode) : FlowStateDialog {
-        when(mode) {
-            FlowState.FlowStateMode.COLOR -> flowModeSpinner?.setSelection(0)
-            FlowState.FlowStateMode.COLOR_TEMPERATURE -> flowModeSpinner?.setSelection(1)
-            FlowState.FlowStateMode.SLEEP -> flowModeSpinner?.setSelection(2)
-        }
-        return this
-    }
-
-    fun setValue(value: Int): FlowStateDialog {
-        colorValue = value
-        selectFlowColorBtn!!.setButtonBackgroundRGB(colorValue)
-        return this
-    }
-
-    fun setBrightness(brightness: Int): FlowStateDialog {
-        setFlowBrightnessSeekbar?.progress = brightness
-        return this
-    }
-
     fun setOnClickListener(listener: (FlowState) -> Unit): FlowStateDialog {
         this.onSaveButtonClickListener = listener
         return this
@@ -112,8 +98,35 @@ class FlowStateDialog private constructor(context: Context) {
         alertDialog?.show()
     }
 
+    private fun setDuration(duration: Int) : FlowStateDialog {
+        flowDurationEditText?.setText(duration.toString())
+        return this
+    }
+
+    private fun setMode(mode: FlowState.FlowStateMode) : FlowStateDialog {
+        when(mode) {
+            FlowState.FlowStateMode.COLOR -> flowModeSpinner?.setSelection(0)
+            FlowState.FlowStateMode.COLOR_TEMPERATURE -> flowModeSpinner?.setSelection(1)
+            FlowState.FlowStateMode.SLEEP -> flowModeSpinner?.setSelection(2)
+        }
+        return this
+    }
+
+    private fun setValue(value: Int): FlowStateDialog {
+        colorValue = value
+        selectFlowColorBtn!!.setButtonBackgroundRGB(colorValue)
+        return this
+    }
+
+    private fun setBrightness(brightness: Int): FlowStateDialog {
+        setFlowBrightnessSeekbar?.progress = brightness
+        return this
+    }
+
     private fun onSaveButtonClick() {
+
         val duration: Int = flowDurationEditText?.text.toString().toInt()
+
         val spinnerPosition = flowModeSpinner?.getSelectedItemPosition()
         var flowMode: FlowState.FlowStateMode = FlowState.FlowStateMode.SLEEP
         when(spinnerPosition) {
@@ -122,10 +135,18 @@ class FlowStateDialog private constructor(context: Context) {
             2 -> flowMode = FlowState.FlowStateMode.SLEEP
         }
         val colorValue = colorValue
-        val brightness = if (setFlowBrightnessSeekbar != null) setFlowBrightnessSeekbar?.progress else 100
+
+        var brightness = if (setFlowBrightnessSeekbar != null) setFlowBrightnessSeekbar?.progress else 100
+        //Brightness can't be 0..
+        if(brightness == 0)
+            brightness = 1
+
         val flowState = FlowState(if(duration != null) duration else 0,flowMode,colorValue,if(brightness != null) brightness else 100)
+
         onSaveButtonClickListener(flowState)
+
         alertDialog?.dismiss()
+
     }
 
 }

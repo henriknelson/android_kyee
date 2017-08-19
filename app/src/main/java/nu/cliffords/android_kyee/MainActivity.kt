@@ -26,6 +26,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         nav_view.setNavigationItemSelectedListener(this)
 
+        //Make sure the correct nav menu item is selected at all times
+        nav_view.menu.getItem(0).setChecked(true)
+        supportFragmentManager.addOnBackStackChangedListener {
+            val count = supportFragmentManager.backStackEntryCount
+            if (count == 0) {
+                nav_view.menu.getItem(0).setChecked(true)
+            }
+        }
+
         supportFragmentManager.beginTransaction().replace(R.id.frame_container,LightsFragment()).commit()
     }
 

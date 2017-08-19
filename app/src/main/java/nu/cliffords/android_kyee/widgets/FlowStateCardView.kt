@@ -2,13 +2,12 @@ package nu.cliffords.android_kyee.widgets
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.RelativeLayout
-import android.widget.Toast
 import kotlinx.android.synthetic.main.card_flow_state_view.view.*
 import nu.cliffords.android_kyee.R
 import nu.cliffords.android_kyee.dialogs.FlowStateDialog
-import nu.cliffords.kyee.classes.FlowState
-import nu.cliffords.kyee.classes.Light
+import nu.cliffords.kyee.classes.Flow.FlowState
 
 /**
  * Created by Henrik Nelson on 2017-08-18.
@@ -16,30 +15,42 @@ import nu.cliffords.kyee.classes.Light
 
 
 //Represents a card view that displays the configuration of one single flow state
-class FlowStateCardView(context: Context) : RelativeLayout(context){
+class FlowStateCardView(context: Context, val flowStateRemoveListener: (FlowStateCardView) -> Unit) : RelativeLayout(context){
 
     var cardFlowState: FlowState? = null
+    var editFlowStateBtn: RoundButton? = null
+    var removeFlowStateBtn: RoundButton? = null
 
-    constructor(context: Context, flowState: FlowState): this(context) {
+    constructor(context: Context, flowState: FlowState, flowStateRemoveListener: (FlowStateCardView) -> Unit): this(context, flowStateRemoveListener) {
         setFlowState(flowState)
     }
 
     init {
-        LayoutInflater.from(context).inflate(R.layout.card_flow_state_view,this,true)
-        this.isClickable = true
-        setOnClickListener {
+        val rootView = LayoutInflater.from(context).inflate(R.layout.card_flow_state_view,this,true)
+
+        setupGUI(rootView)
+        setupActionListeners()
+    }
+
+    private fun setupGUI(view: View) {
+        editFlowStateBtn = rootView.findViewById(R.id.editFlowStateButton)
+        removeFlowStateBtn = rootView.findViewById(R.id.removeFlowStateButton)
+    }
+
+    private fun setupActionListeners() {
+        editFlowStateBtn?.setOnClickListener {
             FlowStateDialog
-                    .with(context)
+                    .with(context,cardFlowState!!)
                     .setTitle("Redigera Flow")
-                    .setDuration(cardFlowState?.duration!!)
-                    .setMode(cardFlowState?.mode!!)
-                    .setValue(cardFlowState?.value!!)
-                    .setBrightness(cardFlowState?.brightness!!)
                     .setOnClickListener { flowState ->
                         setFlowState(flowState)
                     }
                     .build()
                     .show()
+        }
+
+        removeFlowStateBtn?.setOnClickListener {
+            flowStateRemoveListener(this)
         }
     }
 
@@ -52,7 +63,7 @@ class FlowStateCardView(context: Context) : RelativeLayout(context){
         if(cardFlowState == null)
             return
 
-        flowStateColor.setButtonBackgroundRGB(cardFlowState?.value!!)
+        editFlowStateBtn?.setButtonBackgroundRGB(cardFlowState?.value!!)
         durationText.setText("duration: ${cardFlowState?.duration!!} ms")
         var modeStr = ""
         when(cardFlowState?.mode) {

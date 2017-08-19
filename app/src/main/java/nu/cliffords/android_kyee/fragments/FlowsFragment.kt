@@ -9,7 +9,10 @@ import nu.cliffords.android_kyee.R
 import android.support.design.widget.FloatingActionButton
 import android.widget.LinearLayout
 import nu.cliffords.android_kyee.database.FlowDatabase
-import nu.cliffords.android_kyee.widgets.FlowCard
+import nu.cliffords.android_kyee.widgets.FlowCardView
+import android.support.v7.app.AppCompatActivity
+
+
 
 
 /**
@@ -26,24 +29,36 @@ class FlowsFragment(): Fragment() {
         return rootView
     }
 
-    fun setupGUI(view:View?) {
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        (activity as AppCompatActivity).supportActionBar!!.setTitle("Flows")
+    }
+
+    private fun setupGUI(view:View?) {
         flowListView = view?.findViewById<LinearLayout>(R.id.flowsList)
 
         val fab = view?.findViewById<FloatingActionButton>(R.id.fab)
         fab?.setOnClickListener {
             fragmentManager.beginTransaction().replace(R.id.frame_container,FlowFragment()).addToBackStack("flow_fragment").commit()
         }
+    }
 
+    private fun updateFlowList() {
+        flowListView?.removeAllViews()
+        val flows = FlowDatabase.getDatabase(context).flowDao().getAll()
+        flows.forEach{ flow ->
+            val flowView = FlowCardView(context,flow,{
+                //If user signals they want this flow removed
+                FlowDatabase.getDatabase(context).flowDao().delete(flow)
+                updateFlowList()
+            })
+            flowListView?.addView(flowView)
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        flowListView?.removeAllViews()
-        val flows = FlowDatabase.getDatabase(context).flowDao().getAll()
-        flows.forEach{ flow ->
-            val flowView = FlowCard(context,flow)
-            flowListView?.addView(flowView)
-        }
+        updateFlowList()
     }
 
 }

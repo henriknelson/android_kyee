@@ -39,7 +39,8 @@ dependencies {
     compile 'com.github.QuadFlask:colorpicker:0.0.13'
     compile 'com.kyleduo.switchbutton:library:1.4.6'
     compile 'com.afollestad.material-dialogs:core:0.9.4.6'
-    compile 'com.jmedeisis:draglinearlayout:1.1.0'
+    //compile 'com.jmedeisis:draglinearlayout:1.1.0'
+    compile "com.daimajia.swipelayout:library:1.2.0@aar"
     //debugCompile 'com.amitshekhar.android:debug-db:1.0.1'
 
     // room persistence dependency

@@ -4,9 +4,9 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
     <string-array name="flow_actions">
-        <item>Recover to previous state</item>
-        <item>Keep last state</item>
-        <item>Turn off</item>
+        <item>Return to last state before flow</item>
+        <item>Keep the last state in flow</item>
+        <item>Turn off LED</item>
     </string-array>
     <string-array name="flow_mode">
         <item>Color</item>

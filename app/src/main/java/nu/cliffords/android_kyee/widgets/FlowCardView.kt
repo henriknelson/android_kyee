@@ -10,24 +10,23 @@ import android.widget.TextView
 import nu.cliffords.android_kyee.R
 import nu.cliffords.android_kyee.classes.Helpers
 import nu.cliffords.android_kyee.database.Flow
+import nu.cliffords.android_kyee.database.FlowDatabase
 import nu.cliffords.android_kyee.fragments.FlowFragment
-import nu.cliffords.kyee.classes.FlowState
-import nu.cliffords.kyee.classes.Light
-import nu.cliffords.kyee.classes.LightManager
 
 /**
  * Created by Henrik Nelson on 2017-08-18.
  */
 
-class FlowCard(context: Context, val flow: Flow) : RelativeLayout(context){
+class FlowCardView(context: Context, val flow: Flow, val flowDeleteListener: (Int) -> Unit) : RelativeLayout(context){
 
     var nameView: TextView? = null
     var editFlowButton: RoundButton? = null
+    var removeFlowButton: RoundButton? = null
 
     init {
         val rootView = LayoutInflater.from(context).inflate(R.layout.card_flow_view,this,true)
-        this.isClickable = true
-        setOnClickListener {
+        updateGUI(rootView)
+        /*setOnClickListener {
             LightManager.instance.getLights({ lights ->
                 lights.forEach { light ->
                     var flowAction = Light.FlowAction.LED_RECOVERY
@@ -59,20 +58,25 @@ class FlowCard(context: Context, val flow: Flow) : RelativeLayout(context){
                     })
                 }
             })
-        }
+        }*/
 
-        updateGUI(rootView)
     }
 
     private fun updateGUI(view: View) {
         nameView = view?.findViewById(R.id.flowNameText)
         nameView?.text = flow.name
 
-        editFlowButton = view?.findViewById(R.id.flowListButton)
+        editFlowButton = view?.findViewById(R.id.editFlowButton)
         editFlowButton?.setOnClickListener {
             val flowFragment: Fragment = Helpers.instanceOf<FlowFragment>("id" to flow.id!!)
             (context as AppCompatActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container,flowFragment).addToBackStack("flow_fragment").commit()
         }
+
+        removeFlowButton = view?.findViewById(R.id.removeFlowButton)
+        removeFlowButton?.setOnClickListener {
+            flowDeleteListener(flow.id)
+        }
     }
+
 
 }

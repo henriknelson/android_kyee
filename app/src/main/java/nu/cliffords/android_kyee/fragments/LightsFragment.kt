@@ -12,6 +12,9 @@ import android.view.ViewGroup
 import nu.cliffords.android_kyee.adapters.LightsAdapter
 import nu.cliffords.android_kyee.R
 import nu.cliffords.kyee.classes.LightManager
+import android.support.v7.app.AppCompatActivity
+
+
 
 /**
  * Created by Henrik Nelson on 2017-08-14.
@@ -40,6 +43,7 @@ class LightsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        (activity as AppCompatActivity).supportActionBar!!.setTitle("Lights")
         updateLights()
     }
 

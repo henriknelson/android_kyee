@@ -54,7 +54,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="What do do after flow stops?"
+                android:text="What to do after flow stops?"
                 style="@style/InputLabel" />
 
             <Spinner
@@ -76,7 +76,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="List of flows (you can re-arrange in any order):"
+            android:text="List of flows (swipe to delete):"
             style="@style/InputLabel" />
 
 
@@ -84,11 +84,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.jmedeisis.draglinearlayout.DragLinearLayout
+            <LinearLayout
                 android:id="@+id/flowsList"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@id/flowsDescription"
+                android:orientation="vertical"
                 android:backgroundTint="#FF0000" />
 
             <android.support.design.widget.FloatingActionButton

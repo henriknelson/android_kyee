@@ -64,7 +64,8 @@
             <nu.cliffords.android_kyee.widgets.RectangleButton
                 android:id="@+id/button_select_flow_color"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:drawable="@drawable/ic_lightbulb"/>
 
         </LinearLayout>
 
