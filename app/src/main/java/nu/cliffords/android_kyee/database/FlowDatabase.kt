@@ -3,7 +3,6 @@ package nu.cliffords.android_kyee.database
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
-import android.arch.persistence.room.TypeConverters
 import android.content.Context
 
 /**
@@ -23,9 +22,6 @@ abstract class FlowDatabase : RoomDatabase() {
             return INSTANCE!!
         }
 
-        @JvmStatic fun destroyInstance() {
-            INSTANCE = null
-        }
     }
 
 }

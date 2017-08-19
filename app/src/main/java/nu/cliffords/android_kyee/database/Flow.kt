@@ -1,8 +1,10 @@
 package nu.cliffords.android_kyee.database
 
-import android.arch.persistence.room.*
+import android.arch.persistence.room.ColumnInfo
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
+import android.arch.persistence.room.TypeConverters
 import nu.cliffords.android_kyee.classes.FlowStates
-import nu.cliffords.kyee.classes.Flow
 
 /**
  * Created by Henrik Nelson on 2017-08-18.

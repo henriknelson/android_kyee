@@ -2,8 +2,9 @@ package nu.cliffords.android_kyee.fragments
 
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
-import android.view.LayoutInflater
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -18,7 +19,6 @@ import nu.cliffords.android_kyee.dialogs.FlowStateDialog
 import nu.cliffords.android_kyee.widgets.FlowStateCardView
 import nu.cliffords.kyee.classes.Flow.FlowState
 import org.jetbrains.anko.childrenSequence
-import android.support.v7.app.AppCompatActivity
 
 
 
@@ -27,15 +27,15 @@ import android.support.v7.app.AppCompatActivity
  */
 
 //Represents a Fragment that displays a single 'Flow'
-class FlowFragment(): Fragment() {
+class FlowFragment : Fragment() {
 
-    var flowToModify: Flow? = null
-    var nameInput: EditText? = null
-    var countInput: EditText? = null
-    var actionSpinner: Spinner? = null
-    var flowList: LinearLayout? = null
-    var createFlowStateButton: FloatingActionButton? = null
-    var saveButton: Button? = null
+    private var flowToModify: Flow? = null
+    private var nameInput: EditText? = null
+    private var countInput: EditText? = null
+    private var actionSpinner: Spinner? = null
+    private var flowList: LinearLayout? = null
+    private var createFlowStateButton: FloatingActionButton? = null
+    private var saveButton: Button? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -56,26 +56,26 @@ class FlowFragment(): Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         if(flowToModify != null) {
-            (activity as AppCompatActivity).supportActionBar!!.setTitle("Flow: ${flowToModify!!.name}")
+            (activity as AppCompatActivity).supportActionBar!!.title = "Flow: ${flowToModify!!.name}"
         }else{
-            (activity as AppCompatActivity).supportActionBar!!.setTitle("Create flow")
+            (activity as AppCompatActivity).supportActionBar!!.title = "Create flow"
         }
     }
 
     private fun setupGUI(view: View?) {
 
-        nameInput = view?.findViewById<EditText>(R.id.input_name)
-        countInput = view?.findViewById<EditText>(R.id.input_count)
-        actionSpinner = view?.findViewById<Spinner>(R.id.spinner_flow_actions)
-        flowList = view?.findViewById<LinearLayout>(R.id.flowsList)
-        createFlowStateButton = view?.findViewById<FloatingActionButton>(R.id.createFlowStateBtn)
-        saveButton = view?.findViewById<Button>(R.id.btn_save)
+        nameInput = view?.findViewById(R.id.input_name)
+        countInput = view?.findViewById(R.id.input_count)
+        actionSpinner = view?.findViewById(R.id.spinner_flow_actions)
+        flowList = view?.findViewById(R.id.flowsList)
+        createFlowStateButton = view?.findViewById(R.id.createFlowStateBtn)
+        saveButton = view?.findViewById(R.id.btn_save)
 
     }
 
     private fun setupActionListeners() {
 
-        //Floating button to create a new flowstate
+        //Floating button to create a new flow state
         createFlowStateButton?.setOnClickListener {
             FlowStateDialog
                 .with(context)
@@ -100,7 +100,7 @@ class FlowFragment(): Fragment() {
             val action = actionSpinner?.selectedItemPosition!!
 
             //Get a list of flow states for this Flow
-            var flowStates: MutableList<FlowState> = mutableListOf<FlowState>()
+            val flowStates: MutableList<FlowState> = mutableListOf()
             flowList?.childrenSequence()?.forEach { flowStateView ->
                 val flowState = (flowStateView as FlowStateCardView).cardFlowState
                 if (flowState != null)

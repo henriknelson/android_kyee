@@ -3,14 +3,16 @@ package nu.cliffords.android_kyee.dialogs
 import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Color
-import nu.cliffords.android_kyee.R
-import org.jetbrains.anko.layoutInflater
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.SeekBar
+import android.widget.Spinner
 import com.flask.colorpicker.ColorPickerView
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder
+import nu.cliffords.android_kyee.R
 import nu.cliffords.android_kyee.widgets.RectangleButton
 import nu.cliffords.kyee.classes.Flow.FlowState
-import org.intellij.lang.annotations.Flow
+import org.jetbrains.anko.layoutInflater
 
 
 /**
@@ -22,16 +24,16 @@ import org.intellij.lang.annotations.Flow
 
 class FlowStateDialog private constructor(context: Context) {
 
-    val builder: AlertDialog.Builder = AlertDialog.Builder(context, 0);
-    var flowDurationEditText: EditText? = null
-    var flowModeSpinner: Spinner? = null
-    var selectFlowColorBtn: RectangleButton? = null
-    var setFlowBrightnessSeekbar: SeekBar? = null
+    private val builder: AlertDialog.Builder = AlertDialog.Builder(context, 0)
+    private var flowDurationEditText: EditText? = null
+    private var flowModeSpinner: Spinner? = null
+    private var selectFlowColorBtn: RectangleButton? = null
+    private var setFlowBrightnessSeekbar: SeekBar? = null
 
-    var colorValue: Int = 0
+    private var colorValue: Int = 0
 
-    var alertDialog: AlertDialog? = null
-    var onSaveButtonClickListener: ((FlowState) -> Unit) = {}
+    private var alertDialog: AlertDialog? = null
+    private var onSaveButtonClickListener: ((FlowState) -> Unit) = {}
 
     companion object {
         //Only way to instantiate..
@@ -41,10 +43,10 @@ class FlowStateDialog private constructor(context: Context) {
 
         fun with(context: Context, flowState: FlowState) : FlowStateDialog {
             return FlowStateDialog(context)
-                .setDuration(flowState.duration!!)
-                .setMode(flowState.mode!!)
-                .setValue(flowState.value!!)
-                .setBrightness(flowState.brightness!!)
+                .setDuration(flowState.duration)
+                .setMode(flowState.mode)
+                .setValue(flowState.value)
+                .setBrightness(flowState.brightness)
         }
     }
 
@@ -59,7 +61,7 @@ class FlowStateDialog private constructor(context: Context) {
         selectFlowColorBtn?.setOnClickListener {
             ColorPickerDialogBuilder
                     .with(context)
-                    .setTitle("Välj färg")
+                    .setTitle("Choose color")
                     .initialColor(Color.WHITE)
                     .wheelType(ColorPickerView.WHEEL_TYPE.CIRCLE)
                     .density(10)
@@ -127,7 +129,7 @@ class FlowStateDialog private constructor(context: Context) {
 
         val duration: Int = flowDurationEditText?.text.toString().toInt()
 
-        val spinnerPosition = flowModeSpinner?.getSelectedItemPosition()
+        val spinnerPosition = flowModeSpinner?.selectedItemPosition
         var flowMode: FlowState.FlowStateMode = FlowState.FlowStateMode.SLEEP
         when(spinnerPosition) {
             0 -> flowMode = FlowState.FlowStateMode.COLOR
@@ -141,7 +143,7 @@ class FlowStateDialog private constructor(context: Context) {
         if(brightness == 0)
             brightness = 1
 
-        val flowState = FlowState(if(duration != null) duration else 0,flowMode,colorValue,if(brightness != null) brightness else 100)
+        val flowState = FlowState(duration,flowMode,colorValue,if(brightness != null) brightness else 100)
 
         onSaveButtonClickListener(flowState)
 

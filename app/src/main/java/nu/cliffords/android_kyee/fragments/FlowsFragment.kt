@@ -1,16 +1,16 @@
 package nu.cliffords.android_kyee.fragments
 
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import nu.cliffords.android_kyee.R
-import android.support.design.widget.FloatingActionButton
 import android.widget.LinearLayout
+import nu.cliffords.android_kyee.R
 import nu.cliffords.android_kyee.database.FlowDatabase
 import nu.cliffords.android_kyee.widgets.FlowCardView
-import android.support.v7.app.AppCompatActivity
 
 
 
@@ -19,7 +19,7 @@ import android.support.v7.app.AppCompatActivity
  * Created by Henrik Nelson on 2017-08-18.
  */
 
-class FlowsFragment(): Fragment() {
+class FlowsFragment : Fragment() {
 
     private var flowListView: LinearLayout? = null
 
@@ -31,11 +31,11 @@ class FlowsFragment(): Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar!!.setTitle("Flows")
+        (activity as AppCompatActivity).supportActionBar!!.title = "Flows"
     }
 
     private fun setupGUI(view:View?) {
-        flowListView = view?.findViewById<LinearLayout>(R.id.flowsList)
+        flowListView = view?.findViewById(R.id.flowsList)
 
         val fab = view?.findViewById<FloatingActionButton>(R.id.fab)
         fab?.setOnClickListener {

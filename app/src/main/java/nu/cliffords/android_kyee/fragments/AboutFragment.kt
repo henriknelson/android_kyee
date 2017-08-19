@@ -11,10 +11,9 @@ import nu.cliffords.android_kyee.R
  * Created by Henrik Nelson on 2017-08-13.
  */
 
-class AboutFragment(): Fragment() {
+class AboutFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater?.inflate(R.layout.fragment_about, container, false)
-        return rootView
+        return inflater?.inflate(R.layout.fragment_about, container, false)
     }
 }

@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:paddingTop="16dp"
-    android:paddingLeft="24dp"
-    android:paddingRight="24dp">
-
     <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/main"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="1">
+        android:paddingTop="16dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:orientation="vertical">
 
         <!-- Duration Label -->
         <android.support.design.widget.TextInputLayout
@@ -100,7 +96,3 @@
             android:text="Save" />
 
     </LinearLayout>
-
-
-
-</RelativeLayout>

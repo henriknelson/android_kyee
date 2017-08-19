@@ -1,19 +1,17 @@
 package nu.cliffords.android_kyee.fragments
 
-import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import nu.cliffords.android_kyee.adapters.LightsAdapter
 import nu.cliffords.android_kyee.R
+import nu.cliffords.android_kyee.adapters.LightsAdapter
 import nu.cliffords.kyee.classes.LightManager
-import android.support.v7.app.AppCompatActivity
-
 
 
 /**
@@ -35,7 +33,7 @@ class LightsFragment : Fragment() {
         }
 
         val lightsListView: RecyclerView? = rootView?.findViewById(R.id.lightListView)
-        val layoutManager: LinearLayoutManager = LinearLayoutManager(context)
+        val layoutManager = LinearLayoutManager(context)
         lightsListView?.layoutManager = layoutManager
         lightsListView?.adapter = lightsAdapter
         return rootView
@@ -43,19 +41,19 @@ class LightsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar!!.setTitle("Lights")
+        (activity as AppCompatActivity).supportActionBar!!.title = "Lights"
         updateLights()
     }
 
 
-    fun updateLights() {
+    private fun updateLights() {
         lightManager.getLights({ lights ->
             lightsAdapter.clearLights()
             lights.forEach {  light ->
                 lightsAdapter.addLight(light)
             }
             lightsAdapter.notifyDataSetChanged()
-            refreshView!!.setRefreshing(false);
+            refreshView!!.isRefreshing = false
         })
     }
 

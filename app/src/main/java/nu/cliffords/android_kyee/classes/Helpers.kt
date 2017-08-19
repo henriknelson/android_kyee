@@ -12,7 +12,7 @@ class Helpers {
 
     companion object {
 
-        inline fun <reified T : Fragment> instanceOf(vararg params: Pair<String, Any>) = T::class.java.newInstance().apply {
+        inline fun <reified T : Fragment> instanceOf(vararg params: Pair<String, Any>): T = T::class.java.newInstance().apply {
             arguments = bundleOf(*params)
         }
 
@@ -31,32 +31,34 @@ class Helpers {
             var blue: Double
 
             // R
-            if (temperature < 6527) {
-                red = 1.0
+            red = if (temperature < 6527) {
+                1.0
             } else {
                 val redpoly = doubleArrayOf(4.93596077e0, -1.29917429e0, 1.64810386e-01, -1.16449912e-02, 4.86540872e-04, -1.19453511e-05, 1.59255189e-07, -8.89357601e-10)
-                red = poly(redpoly, x)
+                poly(redpoly, x)
 
             }
             // G
-            if (temperature < 850) {
-                green = 0.0
-            } else if (temperature <= 6600) {
-                val greenpoly = doubleArrayOf(-4.95931720e-01, 1.08442658e0, -9.17444217e-01, 4.94501179e-01, -1.48487675e-01, 2.49910386e-02, -2.21528530e-03, 8.06118266e-05)
-                green = poly(greenpoly, x)
-            } else {
-                val greenpoly = doubleArrayOf(3.06119745e0, -6.76337896e-01, 8.28276286e-02, -5.72828699e-03, 2.35931130e-04, -5.73391101e-06, 7.58711054e-08, -4.21266737e-10)
+            when {
+                temperature < 850 -> green = 0.0
+                temperature <= 6600 -> {
+                    val greenpoly = doubleArrayOf(-4.95931720e-01, 1.08442658e0, -9.17444217e-01, 4.94501179e-01, -1.48487675e-01, 2.49910386e-02, -2.21528530e-03, 8.06118266e-05)
+                    green = poly(greenpoly, x)
+                }
+                else -> {
+                    val greenpoly = doubleArrayOf(3.06119745e0, -6.76337896e-01, 8.28276286e-02, -5.72828699e-03, 2.35931130e-04, -5.73391101e-06, 7.58711054e-08, -4.21266737e-10)
 
-                green = poly(greenpoly, x)
+                    green = poly(greenpoly, x)
+                }
             }
             // B
-            if (temperature < 1900) {
-                blue = 0.0
-            } else if (temperature < 6600) {
-                val bluepoly = doubleArrayOf(4.93997706e-01, -8.59349314e-01, 5.45514949e-01, -1.81694167e-01, 4.16704799e-02, -6.01602324e-03, 4.80731598e-04, -1.61366693e-05)
-                blue = poly(bluepoly, x)
-            } else {
-                blue = 1.0
+            when {
+                temperature < 1900 -> blue = 0.0
+                temperature < 6600 -> {
+                    val bluepoly = doubleArrayOf(4.93997706e-01, -8.59349314e-01, 5.45514949e-01, -1.81694167e-01, 4.16704799e-02, -6.01602324e-03, 4.80731598e-04, -1.61366693e-05)
+                    blue = poly(bluepoly, x)
+                }
+                else -> blue = 1.0
             }
 
             red = clamp(red, 0.toDouble(), 255.toDouble())
@@ -70,14 +72,13 @@ class Helpers {
             pixelHSV[0] = hue
             pixelHSV[1] = saturation
             pixelHSV[2] = value
-            val newColor = Color.HSVToColor(pixelHSV)
-            return newColor
+            return Color.HSVToColor(pixelHSV)
         }
 
         private fun poly(coefficients: DoubleArray, x: Double): Double {
             var result = coefficients[0]
             var xn = x
-            for (i in 1..coefficients.size - 1) {
+            for (i in 1 until coefficients.size) {
                 result += xn * coefficients[i]
                 xn *= x
 
@@ -94,16 +95,12 @@ class Helpers {
             } else x
         }
 
-        fun getIntFromColor(Red: Int, Green: Int, Blue: Int): Int {
-            var Red = Red
-            var Green = Green
-            var Blue = Blue
-            Red = Red shl 16 and 0x00FF0000 //Shift red 16-bits and mask out other stuff
-            Green = Green shl 8 and 0x0000FF00 //Shift Green 8-bits and mask out other stuff
-            Blue = Blue and 0x000000FF //Mask out anything not blue.
+        private fun getIntFromColor(Red: Int, Green: Int, Blue: Int): Int {
+            val r = Red shl 16 and 0x00FF0000 //Shift red 16-bits and mask out other stuff
+            val g = Green shl 8 and 0x0000FF00 //Shift Green 8-bits and mask out other stuff
+            val b = Blue and 0x000000FF //Mask out anything not blue.
 
-            val retValue = 0x000000.toInt() or Red or Green or Blue //0xFF000000 for 100% Alpha. Bitwise OR everything together.
-            return retValue
+            return 0x000000 or r or g or b //0xFF000000 for 100% Alpha. Bitwise OR everything together.
         }
 
 

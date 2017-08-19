@@ -9,9 +9,9 @@ import nu.cliffords.kyee.classes.Light
  * Created by Henrik Nelson on 2017-08-11.
  */
 
-class LightsAdapter() : RecyclerView.Adapter<LightsAdapter.ViewHolder>() {
+class LightsAdapter : RecyclerView.Adapter<LightsAdapter.ViewHolder>() {
 
-    private val lightsList: MutableList<Light> = mutableListOf<Light>()
+    private val lightsList: MutableList<Light> = mutableListOf()
 
     fun addLight(light: Light){
         lightsList.add(light)
@@ -33,7 +33,7 @@ class LightsAdapter() : RecyclerView.Adapter<LightsAdapter.ViewHolder>() {
 
     override fun getItemCount() = lightsList.count()
 
-    class ViewHolder(val lightView: LightCardView) : RecyclerView.ViewHolder(lightView) {
+    class ViewHolder(private val lightView: LightCardView) : RecyclerView.ViewHolder(lightView) {
 
         fun bindLight(light: Light) {
             with(light) {

@@ -2,7 +2,6 @@ package nu.cliffords.android_kyee.database
 
 import android.arch.persistence.room.TypeConverter
 import nu.cliffords.android_kyee.classes.FlowStates
-import nu.cliffords.kyee.classes.Flow
 import nu.cliffords.kyee.classes.Flow.FlowState
 import nu.cliffords.kyee.classes.Flow.FlowState.FlowStateMode
 
@@ -17,11 +16,11 @@ class Converter {
         }
 
         @TypeConverter
-        fun toFlowStates(flowStateStr: String) : FlowStates {
+        fun toFlowStates(flowStatesStr: String) : FlowStates {
 
             val flowStateList = mutableListOf<FlowState>()
 
-            flowStateStr.split(";").forEach { flowStateStr ->
+            flowStatesStr.split(";").forEach { flowStateStr ->
                 val flowStateParams = flowStateStr.split(",")
                 if(flowStateParams.size == 4){
                     val duration = flowStateParams[0].toInt()
@@ -32,7 +31,7 @@ class Converter {
                         7 -> flowStateMode = FlowStateMode.SLEEP
                     }
                     val value = flowStateParams[2].toInt()
-                    var brightness = flowStateParams[3].toInt()
+                    val brightness = flowStateParams[3].toInt()
                     val flowState = FlowState(duration,flowStateMode,value,brightness)
                     flowStateList.add(flowState)
                 }

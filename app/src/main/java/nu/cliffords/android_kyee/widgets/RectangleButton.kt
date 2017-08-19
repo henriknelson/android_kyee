@@ -30,13 +30,14 @@ class RectangleButton @JvmOverloads constructor(
             val attributes = getContext().obtainStyledAttributes(attrs,R.styleable.RectangleButton)
             val myDrawable = attributes.getDrawable(R.styleable.RectangleButton_android_drawable)
             myImageView?.setImageDrawable(myDrawable)
+            attributes.recycle()
         }
 
     }
 
-    fun setButtonBackground(color: Int){
+    private fun setButtonBackground(color: Int){
         try {
-            myImageView!!.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+            myImageView!!.setColorFilter(color, PorterDuff.Mode.SRC_ATOP)
         }catch (e:Exception){
             Log.e("android_kyee","Could not select color button color")
         }
