@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/flowSwipeLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="70dp">
+
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_margin="6dp"
+            android:orientation="vertical"
+            card_view:cardCornerRadius="1dp"
+            card_view:cardElevation="3dp">
+
+            <RelativeLayout
+                android:id="@+id/buttonLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="10dp">
+
+                <RelativeLayout
+                    android:id="@+id/stateColorLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent">
+
+                    <nu.cliffords.android_kyee.widgets.RoundButton
+                        android:id="@+id/playFlowButton"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/stateColorLayout"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/flowNameText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|left"
+                        android:text="" />
+
+
+                    <TextView
+                        android:id="@+id/modeText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|left"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/brightText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|left"
+                        android:text="" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>

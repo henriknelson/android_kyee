@@ -144,7 +144,7 @@ class LightCardView(context: Context) : RelativeLayout(context), LightStateChang
                 .setTitle("Choose color")
                 .initialColor(Color.WHITE)
                 .wheelType(ColorPickerView.WHEEL_TYPE.CIRCLE)
-                .density(12)
+                .density(10)
                 .lightnessSliderOnly()
     }
 
