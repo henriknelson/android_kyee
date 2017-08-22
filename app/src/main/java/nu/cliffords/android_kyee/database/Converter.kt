@@ -1,7 +1,6 @@
 package nu.cliffords.android_kyee.database
 
 import android.arch.persistence.room.TypeConverter
-import nu.cliffords.android_kyee.classes.FlowStates
 import nu.cliffords.kyee.classes.Flow.FlowState
 import nu.cliffords.kyee.classes.Flow.FlowState.FlowStateMode
 

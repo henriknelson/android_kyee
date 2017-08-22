@@ -1,4 +1,4 @@
-package nu.cliffords.android_kyee.classes
+package nu.cliffords.android_kyee.util
 
 import android.graphics.Color
 import android.support.v4.app.Fragment
@@ -64,7 +64,7 @@ class Helpers {
             red = clamp(red, 0.toDouble(), 255.toDouble())
             blue = clamp(blue, 0.toDouble(), 255.toDouble())
             green = clamp(green, 0.toDouble(), 255.toDouble())
-            return getIntFromColor(red.toInt(),green.toInt(),blue.toInt())
+            return getIntFromColor(red.toInt(), green.toInt(), blue.toInt())
         }
 
         fun HsvToColor(hue: Float, saturation: Float,value:Float) : Int {

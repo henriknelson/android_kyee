@@ -29,7 +29,7 @@ class FlowCardPlayView(context: Context) : RelativeLayout(context){
         this.flowPlayListener = flowPlayListener
         this.flowPausListener = flowPauseListener
         updateGUI()
-        toggleImage()
+        playFlowButton.setImageDrawable(playIcon)
     }
 
     init {
@@ -48,25 +48,17 @@ class FlowCardPlayView(context: Context) : RelativeLayout(context){
                 {
                     flowPlayListener(flow!!)
                     isPlaying = true
-                    toggleImage()
+                    playFlowButton.setImageDrawable(pausIcon)
                 }
                 else
                 {
                     flowPausListener(flow!!)
                     isPlaying = false
-                    toggleImage()
+                    playFlowButton.setImageDrawable(playIcon)
                 }
             }
 
         }
     }
-
-    private fun toggleImage() {
-        if(!isPlaying)
-            playFlowButton.setImageDrawable(playIcon)
-        else
-            playFlowButton.setImageDrawable(pausIcon)
-    }
-
 
 }

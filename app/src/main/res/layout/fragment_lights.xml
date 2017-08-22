@@ -11,7 +11,7 @@
 
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/lightListView"
+        android:id="@+id/lightsListView"
         android:layout_width="fill_parent"
         android:layout_height="match_parent" />
 

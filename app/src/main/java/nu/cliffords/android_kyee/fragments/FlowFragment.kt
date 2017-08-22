@@ -12,7 +12,7 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Spinner
 import nu.cliffords.android_kyee.R
-import nu.cliffords.android_kyee.classes.FlowStates
+import nu.cliffords.android_kyee.database.FlowStates
 import nu.cliffords.android_kyee.database.Flow
 import nu.cliffords.android_kyee.database.FlowDatabase
 import nu.cliffords.android_kyee.dialogs.FlowStateDialog
@@ -118,7 +118,7 @@ class FlowFragment : Fragment() {
             // ..or a modified one:
             else
             {
-                val flow = Flow(name,count,0,FlowStates(flowStates))
+                val flow = Flow(name,count,0, FlowStates(flowStates))
                 FlowDatabase.getDatabase(context).flowDao().insertFlow(flow)
             }
 

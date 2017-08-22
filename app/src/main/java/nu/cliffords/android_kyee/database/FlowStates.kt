@@ -1,4 +1,4 @@
-package nu.cliffords.android_kyee.classes
+package nu.cliffords.android_kyee.database
 
 import nu.cliffords.kyee.classes.Flow.FlowState
 

@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import android.widget.TextView
 import nu.cliffords.android_kyee.R
-import nu.cliffords.android_kyee.classes.Helpers
+import nu.cliffords.android_kyee.util.Helpers
 import nu.cliffords.android_kyee.database.Flow
 import nu.cliffords.android_kyee.fragments.FlowFragment
 

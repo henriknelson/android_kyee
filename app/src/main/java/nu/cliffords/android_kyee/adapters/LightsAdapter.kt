@@ -22,6 +22,7 @@ class LightsAdapter : RecyclerView.Adapter<LightsAdapter.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val light = lightsList[viewType]
         val view = LightCardView(parent.context)
         return ViewHolder(view)
     }
@@ -37,8 +38,9 @@ class LightsAdapter : RecyclerView.Adapter<LightsAdapter.ViewHolder>() {
 
         fun bindLight(light: Light) {
             with(light) {
-                light.registerStateListener(lightView)
                 lightView.setLight(light)
+                //light.registerStateListener(lightView)
+                //lightView.setLight(light)
             }
         }
     }

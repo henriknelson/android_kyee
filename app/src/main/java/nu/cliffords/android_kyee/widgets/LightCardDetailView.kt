@@ -11,7 +11,7 @@ import com.flask.colorpicker.ColorPickerView
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder
 import kotlinx.android.synthetic.main.card_light_detail_view.view.*
 import nu.cliffords.android_kyee.R
-import nu.cliffords.android_kyee.classes.Helpers
+import nu.cliffords.android_kyee.util.Helpers
 import nu.cliffords.android_kyee.database.FlowDatabase
 import nu.cliffords.kyee.classes.Light
 import nu.cliffords.kyee.interfaces.LightStateChangeListener
