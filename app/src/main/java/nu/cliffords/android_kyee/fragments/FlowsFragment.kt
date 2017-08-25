@@ -1,5 +1,6 @@
 package nu.cliffords.android_kyee.fragments
 
+//import nu.cliffords.android_kyee.database.FlowDatabase
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
@@ -9,8 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import nu.cliffords.android_kyee.R
-import nu.cliffords.android_kyee.database.FlowDatabase
-import nu.cliffords.android_kyee.widgets.FlowCardView
 
 
 
@@ -45,7 +44,7 @@ class FlowsFragment : Fragment() {
 
     private fun updateFlowList() {
         flowListView?.removeAllViews()
-        val flows = FlowDatabase.getDatabase(context).flowDao().getAll()
+        /*val flows = FlowDatabase.getDatabase(context).flowDao().getAll()
         flows.forEach{ flow ->
             val flowView = FlowCardView(context,flow,{
                 //If user signals they want this flow removed
@@ -53,7 +52,7 @@ class FlowsFragment : Fragment() {
                 updateFlowList()
             })
             flowListView?.addView(flowView)
-        }
+        }*/
     }
 
     override fun onResume() {

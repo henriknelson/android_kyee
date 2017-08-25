@@ -12,6 +12,8 @@ import nu.cliffords.android_kyee.fragments.AboutFragment
 import nu.cliffords.android_kyee.fragments.FlowsFragment
 import nu.cliffords.android_kyee.fragments.LightsFragment
 
+
+
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {

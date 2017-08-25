@@ -12,7 +12,7 @@ import com.flask.colorpicker.builder.ColorPickerDialogBuilder
 import kotlinx.android.synthetic.main.card_light_detail_view.view.*
 import nu.cliffords.android_kyee.R
 import nu.cliffords.android_kyee.util.Helpers
-import nu.cliffords.android_kyee.database.FlowDatabase
+//import nu.cliffords.android_kyee.database.FlowDatabase
 import nu.cliffords.kyee.classes.Light
 import nu.cliffords.kyee.interfaces.LightStateChangeListener
 
@@ -118,7 +118,7 @@ class LightCardDetailView(context: Context) : RelativeLayout(context), LightStat
 
     private fun updateFlowList() {
         light_card_detail_flowList.removeAllViews()
-        val flows = FlowDatabase.getDatabase(context).flowDao().getAll()
+        /*val flows = FlowDatabase.getDatabase(context).flowDao().getAll()
         flows.forEach{ flow ->
             val flowPlayView = FlowCardPlayView(context,flow,{
                 //If user signals they want this flow played or stopped
@@ -128,7 +128,7 @@ class LightCardDetailView(context: Context) : RelativeLayout(context), LightStat
                 cardLight!!.stopColorFlow {  }
             })
             light_card_detail_flowList.addView(flowPlayView)
-        }
+        }*/
     }
 
     override fun onStateChanged(params: Map<String, Any>) {

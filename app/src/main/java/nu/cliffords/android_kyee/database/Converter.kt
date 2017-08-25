@@ -1,14 +1,10 @@
 package nu.cliffords.android_kyee.database
 
-import android.arch.persistence.room.TypeConverter
-import nu.cliffords.kyee.classes.Flow.FlowState
-import nu.cliffords.kyee.classes.Flow.FlowState.FlowStateMode
-
 /**
  * Created by Henrik Nelson on 2017-08-19.
  */
 class Converter {
-
+/*
         @TypeConverter
         fun fromFlowStates(flowStates: FlowStates) : String {
             return flowStates.flowStates.joinToString(";")
@@ -37,5 +33,5 @@ class Converter {
             }
             return FlowStates(flowStateList)
         }
-
+*/
 }

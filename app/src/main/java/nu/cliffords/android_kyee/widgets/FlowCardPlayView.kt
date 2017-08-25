@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import kotlinx.android.synthetic.main.card_flow_play_view.view.*
 import nu.cliffords.android_kyee.R
-import nu.cliffords.android_kyee.database.Flow
+import nu.cliffords.kyee.classes.Flow
+
+//import nu.cliffords.android_kyee.database.Flow
 
 
 
@@ -16,18 +18,18 @@ import nu.cliffords.android_kyee.database.Flow
 class FlowCardPlayView(context: Context) : RelativeLayout(context){
 
     private var isPlaying: Boolean = false
-    var flow: Flow? = null
-    var flowPlayListener: (Flow) -> Unit = {}
-    var flowPausListener: (Flow) -> Unit = {}
+    //var flow: Flow? = null
+    //var flowPlayListener: (Flow) -> Unit = {}
+    //var flowPausListener: (Flow) -> Unit = {}
 
     var playIcon = resources.getDrawable(R.drawable.ic_play_flow)
     var pausIcon = resources.getDrawable(R.drawable.ic_pause_flow)
 
 
-    constructor(context: Context, flow: Flow,flowPlayListener: (Flow) -> Unit, flowPauseListener: (Flow) -> Unit) : this(context) {
-        this.flow = flow
-        this.flowPlayListener = flowPlayListener
-        this.flowPausListener = flowPauseListener
+    constructor(context: Context, flow: Flow, flowPlayListener: (Flow) -> Unit, flowPauseListener: (Flow) -> Unit) : this(context) {
+        //this.flow = flow
+        //this.flowPlayListener = flowPlayListener
+        //this.flowPausListener = flowPauseListener
         updateGUI()
         playFlowButton.setImageDrawable(playIcon)
     }
@@ -38,7 +40,7 @@ class FlowCardPlayView(context: Context) : RelativeLayout(context){
     }
 
     private fun updateGUI() {
-        if(flow != null)
+        /*if(flow != null)
             flowNameText.text = flow!!.name
 
         playFlowButton.setOnClickListener {
@@ -58,7 +60,7 @@ class FlowCardPlayView(context: Context) : RelativeLayout(context){
                 }
             }
 
-        }
+        }*/
     }
 
 }

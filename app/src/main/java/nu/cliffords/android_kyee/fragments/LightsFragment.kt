@@ -9,16 +9,38 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_lights.*
 import nu.cliffords.android_kyee.R
 import nu.cliffords.android_kyee.adapters.LightsAdapter
-import nu.cliffords.kyee.classes.LightManager
+import nu.cliffords.android_kyee.app.App
+import nu.cliffords.android_kyee.interfaces.LightsInteractor
+import nu.cliffords.android_kyee.presenters.LightsPresenter
+import nu.cliffords.kyee.classes.Light
+import javax.inject.Inject
+
+
+
+
+
+
 
 
 /**
  * Created by Henrik Nelson on 2017-08-14.
  */
 
-class LightsFragment : Fragment() {
+class LightsFragment : Fragment(), LightsInteractor.View {
 
     private val lightsAdapter: LightsAdapter = LightsAdapter()
+    private var presenter: LightsPresenter? = null
+
+    @Inject
+    fun setPresenter(presenter: LightsPresenter) {
+        this.presenter = presenter
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        (activity.application as App).component.inject(this)
+        presenter?.bind(this)
+    }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater?.inflate(R.layout.fragment_lights, container, false)
@@ -27,7 +49,7 @@ class LightsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         refreshView.setOnRefreshListener {
-            updateLights()
+            presenter?.discoverLights(timeout=2)
         }
         val layoutManager = LinearLayoutManager(context)
         lightsListView.layoutManager = layoutManager
@@ -35,15 +57,13 @@ class LightsFragment : Fragment() {
 
     }
 
-    private fun updateLights() {
-        LightManager.instance.getLights({ lights ->
-            lightsAdapter.clearLights()
-            lights.sortedBy { it.name }.forEach {  light ->
-                lightsAdapter.addLight(light)
-            }
-            lightsAdapter.notifyDataSetChanged()
-            refreshView!!.isRefreshing = false
-        })
+    override fun updateLights(lights: List<Light>) {
+        lightsAdapter.clearLights()
+        lights.sortedBy { it.name }.forEach {  light ->
+            lightsAdapter.addLight(light)
+        }
+        lightsAdapter.notifyDataSetChanged()
+        refreshView!!.isRefreshing = false
     }
 
 }

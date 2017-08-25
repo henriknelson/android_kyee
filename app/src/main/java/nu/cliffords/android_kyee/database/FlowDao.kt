@@ -1,11 +1,9 @@
 package nu.cliffords.android_kyee.database
 
-import android.arch.persistence.room.*
-
 /**
  * Created by Henrik Nelson on 2017-08-18.
  */
-
+/*
 @Dao
 interface FlowDao {
 
@@ -25,3 +23,4 @@ interface FlowDao {
     fun delete(flow: Flow)
 
 }
+*/
