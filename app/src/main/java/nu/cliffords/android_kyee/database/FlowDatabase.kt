@@ -9,7 +9,7 @@ import android.content.Context
  * Created by Henrik Nelson on 2017-08-18.
 */
 
-@Database(entities = arrayOf(Flow::class), version = 1)
+@Database(entities = arrayOf(Flow::class), version = 2)
 abstract class FlowDatabase : RoomDatabase() {
 
     abstract fun flowDao(): FlowDao

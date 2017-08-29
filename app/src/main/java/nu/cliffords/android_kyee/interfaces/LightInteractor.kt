@@ -1,5 +1,6 @@
 package nu.cliffords.android_kyee.interfaces
 
+import nu.cliffords.kyee.classes.Flow
 import nu.cliffords.kyee.classes.Light
 
 /**
@@ -13,6 +14,8 @@ interface LightInteractor {
         fun setColor(color: Int)
         fun setBrightness(brightness: Int)
         fun setPower(powered: Boolean)
+        fun setFlowStarted()
+        fun setFlowStopped()
     }
 
     interface UserActionsListener {
@@ -20,5 +23,8 @@ interface LightInteractor {
         fun setBrightness(brightness: Int, listener: (Int) -> Unit)
         fun setPower(powered: Boolean, listener: (Boolean) -> Unit)
         fun setColor(color: Int, listener: (Int) -> Unit)
+        fun setName(name: String, listener: (String) -> Unit)
+        fun startColorFlow(count: Int, action: Light.FlowAction, states:List<Flow.FlowState>, listener: (Boolean) -> Unit)
+        fun stopColorFlow(listener: (Boolean) -> Unit)
     }
 }

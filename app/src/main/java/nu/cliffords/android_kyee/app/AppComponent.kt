@@ -13,7 +13,7 @@ import javax.inject.Singleton
  */
 
 @Singleton
-@Component(modules=arrayOf(AppModule::class,LightsModule::class,LightModule::class,FlowsModule::class, FlowModule::class))
+@Component(modules=arrayOf(AppModule::class,LightsModule::class, LightModule::class,FlowsModule::class, FlowModule::class))
 interface AppComponent {
     fun inject(app: AppModule)
     fun inject(fragment: LightsFragment)

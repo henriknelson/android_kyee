@@ -2,6 +2,7 @@ package nu.cliffords.android_kyee.fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -42,6 +43,7 @@ class LightsFragment : Fragment(), LightsInteractor.View {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        (activity as AppCompatActivity).supportActionBar!!.title = "Lights"
         refreshView.setOnRefreshListener {
             presenter?.discoverLights(timeout=2)
         }
@@ -59,7 +61,7 @@ class LightsFragment : Fragment(), LightsInteractor.View {
     }
 
     override fun setRefreshing(isRefreshing: Boolean) {
-        refreshView.isRefreshing = isRefreshing
+        refreshView?.isRefreshing = isRefreshing
     }
 
 }

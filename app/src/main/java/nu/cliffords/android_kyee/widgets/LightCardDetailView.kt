@@ -1,28 +1,16 @@
 package nu.cliffords.android_kyee.widgets
 
-import android.content.Context
-import android.graphics.Color
-import android.text.InputType
-import android.view.LayoutInflater
-import android.widget.RelativeLayout
-import android.widget.SeekBar
-import com.afollestad.materialdialogs.MaterialDialog
-import com.flask.colorpicker.ColorPickerView
-import com.flask.colorpicker.builder.ColorPickerDialogBuilder
-import kotlinx.android.synthetic.main.card_light_detail_view.view.*
-import nu.cliffords.android_kyee.R
-import nu.cliffords.android_kyee.util.Helpers
 //import nu.cliffords.android_kyee.database.FlowDatabase
-import nu.cliffords.kyee.classes.Light
-import nu.cliffords.kyee.interfaces.LightStateChangeListener
+import android.content.Context
+import android.widget.RelativeLayout
 
 /**
  * Created by Henrik Nelson on 2017-08-20.
  */
 
-class LightCardDetailView(context: Context) : RelativeLayout(context), LightStateChangeListener {
+class LightCardDetailView(context: Context) : RelativeLayout(context) {
 
-    var cardLight: Light? = null
+    /*var cardLight: Light? = null
 
     init {
         LayoutInflater.from(context).inflate(R.layout.card_light_detail_view,this,true)
@@ -143,6 +131,6 @@ class LightCardDetailView(context: Context) : RelativeLayout(context), LightStat
                 .wheelType(ColorPickerView.WHEEL_TYPE.CIRCLE)
                 .density(10)
                 .lightnessSliderOnly()
-    }
+    }*/
 
 }

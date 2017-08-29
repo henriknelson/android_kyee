@@ -12,14 +12,12 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Spinner
 import nu.cliffords.android_kyee.R
-import nu.cliffords.android_kyee.database.FlowStates
 import nu.cliffords.android_kyee.database.Flow
 import nu.cliffords.android_kyee.database.FlowDatabase
+import nu.cliffords.android_kyee.database.FlowStates
 import nu.cliffords.android_kyee.dialogs.FlowStateDialog
 import nu.cliffords.android_kyee.widgets.FlowStateCardView
 import org.jetbrains.anko.childrenSequence
-
-
 
 /**
  * Created by Henrik Nelson on 2017-08-18.
