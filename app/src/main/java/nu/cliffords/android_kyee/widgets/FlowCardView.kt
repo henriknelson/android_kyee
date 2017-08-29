@@ -1,12 +1,11 @@
 package nu.cliffords.android_kyee.widgets
 
-//import nu.cliffords.android_kyee.database.Flow
+import nu.cliffords.android_kyee.database.Flow
 import android.content.Context
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import android.widget.TextView
 import nu.cliffords.android_kyee.R
-import nu.cliffords.kyee.classes.Flow
 
 /**
  * Created by Henrik Nelson on 2017-08-18.
@@ -17,57 +16,28 @@ class FlowCardView(context: Context) : RelativeLayout(context){
     private var nameView: TextView? = null
     private var editFlowButton: RoundButton? = null
     private var removeFlowButton: RoundButton? = null
-    //var flow: Flow? = null
-    var flowDeleteListener: (Int) -> Unit = {}
+    private var flow: Flow? = null
+    //var flowDeleteListener: (Int) -> Unit = {}
 
 
-    constructor(context: Context, flow: Flow, flowDeleteListener: (Int) -> Unit) : this(context) {
-        //this.flow = flow
-        this.flowDeleteListener = flowDeleteListener
+    /*constructor(context: Context, flow: Flow): this(context) {//, flowDeleteListener: (Int) -> Unit) : this(context) {
+        this.flow = flow
+        //this.flowDeleteListener = flowDeleteListener
         updateGUI()
-    }
+    }*/
 
     init {
         LayoutInflater.from(context).inflate(R.layout.card_flow_view,this,true)
-        /*setOnClickListener {
-            LightManager.instance.getLights({ lights ->
-                lights.forEach { light ->
-                    var flowAction = Light.FlowAction.LED_RECOVERY
-                    when(flow.action){
-                        0 -> flowAction = Light.FlowAction.LED_RECOVERY
-                        1 -> flowAction = Light.FlowAction.LED_STAY
-                        2 -> flowAction = Light.FlowAction.LED_TURNOFF
-                    }
+    }
 
-                    var stateList: MutableList<FlowState> = mutableListOf()
-                    flow.flow_states.split(";").forEach { flowStateStr ->
-                        val flowStateParams = flowStateStr.split(",")
-                        if(flowStateParams.size == 4) {
-                            val duration = flowStateParams[0].toInt()
-                            var flowStateMode = FlowState.FlowStateMode.COLOR
-                            when (flowStateParams[1].toInt()) {
-                                1 -> flowStateMode = FlowState.FlowStateMode.COLOR
-                                2 -> flowStateMode = FlowState.FlowStateMode.COLOR_TEMPERATURE
-                                7 -> flowStateMode = FlowState.FlowStateMode.SLEEP
-                            }
-                            val value = flowStateParams[2].toInt()
-                            var brightness = flowStateParams[3].toInt()
-                            val flowState = FlowState(duration, flowStateMode, value, brightness)
-                            stateList.add(flowState)
-                        }
-                    }
-                    light.startColorFlow(flow.count,flowAction,stateList.toList(),{
-
-                    })
-                }
-            })
-        }*/
-
+    fun setFlow(flow: Flow) {
+        this.flow = flow
+        updateGUI()
     }
 
     private fun updateGUI() {
         nameView = rootView.findViewById(R.id.flowNameText)
-        //nameView?.text = flow!!.name
+        nameView?.text = flow!!.name
 
         editFlowButton = rootView.findViewById(R.id.editFlowButton)
         editFlowButton?.setOnClickListener {

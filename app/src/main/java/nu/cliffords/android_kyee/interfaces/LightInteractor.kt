@@ -1,10 +1,12 @@
 package nu.cliffords.android_kyee.interfaces
 
+import nu.cliffords.kyee.classes.Light
+
 /**
  * Created by Henrik Nelson on 2017-08-21.
  */
 
-interface LightContract {
+interface LightInteractor {
 
     interface View {
         fun setName(name: String)
@@ -14,8 +16,9 @@ interface LightContract {
     }
 
     interface UserActionsListener {
-        fun setBrightness(brightness: Int)
-        fun setPower(powered: Boolean)
-        fun setColor(color: Int)
+        fun setLight(light: Light)
+        fun setBrightness(brightness: Int, listener: (Int) -> Unit)
+        fun setPower(powered: Boolean, listener: (Boolean) -> Unit)
+        fun setColor(color: Int, listener: (Int) -> Unit)
     }
 }

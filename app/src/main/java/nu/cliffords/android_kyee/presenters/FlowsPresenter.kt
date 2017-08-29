@@ -7,11 +7,12 @@ import javax.inject.Inject
  * Created by Henrik Nelson on 2017-08-26.
  */
 
-class FlowsPresenter @Inject constructor (private val interactor: FlowsInteractor.UserActionsListener): AbsPresenter<FlowsInteractor.View>(){
+class FlowsPresenter @Inject constructor (private val interactor: FlowsInteractor.UserActionsListener): BasePresenter<FlowsInteractor.View>(){
 
-    fun getFlows(listener: (Unit)-> Unit) {
+    fun getFlows() {
+        view?.clearFlows()
         interactor.getFlows({ flows ->
-            view?.updateFlows()
+            view?.setFlows(flows)
         })
     }
 

@@ -11,6 +11,8 @@ class App : Application() {
         DaggerAppComponent
                 .builder()
                 .appModule(AppModule(this))
+                .flowsModule(FlowsModule(this))
+                .flowModule(FlowModule(this))
                 .build()
     }
 

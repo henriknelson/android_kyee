@@ -11,7 +11,7 @@ class LightsInteractorImpl: LightsInteractor.UserActionsListener {
     override fun discoverLights(listener: (List<Light>) -> Unit, timeout: Int) {
 
         doAsync {
-            val lights = LightManager.instance.getLights()
+            val lights = LightManager.instance.getLights(timeoutTime = timeout)
             uiThread {
                 listener(lights)
             }

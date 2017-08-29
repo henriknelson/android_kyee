@@ -5,30 +5,39 @@ import android.graphics.Color
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.RelativeLayout
 import android.widget.SeekBar
 import com.flask.colorpicker.ColorPickerView
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder
 import kotlinx.android.synthetic.main.card_light_view.view.*
 import nu.cliffords.android_kyee.R
+import nu.cliffords.android_kyee.app.App
 import nu.cliffords.android_kyee.util.Helpers
 import nu.cliffords.android_kyee.fragments.LightFragment
-import nu.cliffords.android_kyee.interfaces.LightContract
+import nu.cliffords.android_kyee.interfaces.LightInteractor
 import nu.cliffords.android_kyee.presenters.LightPresenter
 import nu.cliffords.kyee.classes.Light
+import javax.inject.Inject
 
 /**
  * Created by Henrik Nelson on 2017-08-15.
  */
 
-class LightCardView(context: Context) : RelativeLayout(context), LightContract.View {
+class LightCardView(context: Context) : RelativeLayout(context), LightInteractor.View {
 
     private var presenter: LightPresenter? = null
+
+    @Inject
+    fun setPresenter(presenter: LightPresenter) {
+        this.presenter = presenter
+    }
+
     private var cardLight: Light? = null
 
     init {
         LayoutInflater.from(context).inflate(R.layout.card_light_view,this,true)
-
+        (context.applicationContext as App).component.inject(this)
 
         cardLayout.isClickable = true
         cardLayout.setOnClickListener {
@@ -65,9 +74,19 @@ class LightCardView(context: Context) : RelativeLayout(context), LightContract.V
 
     }
 
+    override fun onViewAdded(child: View?) {
+        super.onViewAdded(child)
+        presenter?.bind(this)
+    }
+
+    override fun onViewRemoved(child: View?) {
+        super.onViewRemoved(child)
+        presenter?.unbind()
+    }
+
     fun setLight(light: Light) {
         cardLight = light
-        presenter = LightPresenter(this,light)
+        presenter?.setLight(light)
     }
 
     override fun setName(name: String) {

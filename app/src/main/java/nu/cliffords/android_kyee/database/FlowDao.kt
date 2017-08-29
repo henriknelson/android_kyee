@@ -1,7 +1,6 @@
 package nu.cliffords.android_kyee.database
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Query
+import android.arch.persistence.room.*
 
 /**
  * Created by Henrik Nelson on 2017-08-18.
@@ -13,7 +12,7 @@ interface FlowDao {
     @Query("SELECT * FROM flows")
     fun getAll(): List<Flow>
 
-    @Query("SELECT * FROM flows WHERE id LIKE :arg0")
+    @Query("SELECT * FROM flows WHERE id LIKE :id")
     fun get(id: Int): Flow
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -26,4 +25,3 @@ interface FlowDao {
     fun delete(flow: Flow)
 
 }
-*/

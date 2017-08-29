@@ -12,12 +12,11 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Spinner
 import nu.cliffords.android_kyee.R
-//import nu.cliffords.android_kyee.database.FlowStates
-//import nu.cliffords.android_kyee.database.Flow
-//import nu.cliffords.android_kyee.database.FlowDatabase
+import nu.cliffords.android_kyee.database.FlowStates
+import nu.cliffords.android_kyee.database.Flow
+import nu.cliffords.android_kyee.database.FlowDatabase
 import nu.cliffords.android_kyee.dialogs.FlowStateDialog
 import nu.cliffords.android_kyee.widgets.FlowStateCardView
-import nu.cliffords.kyee.classes.Flow.FlowState
 import org.jetbrains.anko.childrenSequence
 
 
@@ -29,7 +28,7 @@ import org.jetbrains.anko.childrenSequence
 //Represents a Fragment that displays a single 'Flow'
 class FlowFragment : Fragment() {
 
-    private var flowToModify = null//Flow? = null
+    private var flowToModify: Flow? = null
     private var nameInput: EditText? = null
     private var countInput: EditText? = null
     private var actionSpinner: Spinner? = null
@@ -47,8 +46,8 @@ class FlowFragment : Fragment() {
         // the flows database id should be passed as an argument
         if(arguments?.getInt("id") != null) {
             val id = arguments.getInt("id")
-            //val flowToChange = FlowDatabase.getDatabase(context).flowDao().get(id)
-            //setFlow(flowToChange)
+            val flowToChange = FlowDatabase.getDatabase(context).flowDao().get(id)
+            setFlow(flowToChange)
         }
         return rootView
     }
@@ -56,7 +55,7 @@ class FlowFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         if(flowToModify != null) {
-            //(activity as AppCompatActivity).supportActionBar!!.title = "Flow: ${flowToModify!!.name}"
+            (activity as AppCompatActivity).supportActionBar!!.title = "Flow: ${flowToModify!!.name}"
         }else{
             (activity as AppCompatActivity).supportActionBar!!.title = "Create flow"
         }
@@ -100,7 +99,7 @@ class FlowFragment : Fragment() {
             val action = actionSpinner?.selectedItemPosition!!
 
             //Get a list of flow states for this Flow
-            val flowStates: MutableList<FlowState> = mutableListOf()
+            val flowStates: MutableList<nu.cliffords.kyee.classes.Flow.FlowState> = mutableListOf()
             flowList?.childrenSequence()?.forEach { flowStateView ->
                 val flowState = (flowStateView as FlowStateCardView).cardFlowState
                 if (flowState != null)
@@ -109,24 +108,24 @@ class FlowFragment : Fragment() {
 
             // If this is a completely new Flow:
             if (flowToModify != null) {
-                //flowToModify!!.name = name
-                //flowToModify!!.count = count
-                //flowToModify!!.action = action
-                //flowToModify!!.flow_states = FlowStates(flowStates)
-                //FlowDatabase.getDatabase(context).flowDao().insertFlow(flowToModify!!)
+                flowToModify!!.name = name
+                flowToModify!!.count = count
+                flowToModify!!.action = action
+                flowToModify!!.flow_states = FlowStates(flowStates)
+                FlowDatabase.getDatabase(context).flowDao().insertFlow(flowToModify!!)
             }
             // ..or a modified one:
             else
             {
-                //val flow = Flow(name,count,0, FlowStates(flowStates))
-                //FlowDatabase.getDatabase(context).flowDao().insertFlow(flow)
+                val flow = Flow(name,count,0, FlowStates(flowStates))
+                FlowDatabase.getDatabase(context).flowDao().insertFlow(flow)
             }
 
             fragmentManager.popBackStackImmediate()
         }
     }
 
-    /*private fun setFlow(flow: Flow) {
+    private fun setFlow(flow: Flow) {
 
         flowToModify = flow
 
@@ -141,5 +140,5 @@ class FlowFragment : Fragment() {
             })
             flowList?.addView(flowView)
         }
-    }*/
+    }
 }

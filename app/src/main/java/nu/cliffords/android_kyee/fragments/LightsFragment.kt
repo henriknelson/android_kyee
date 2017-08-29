@@ -16,12 +16,6 @@ import nu.cliffords.kyee.classes.Light
 import javax.inject.Inject
 
 
-
-
-
-
-
-
 /**
  * Created by Henrik Nelson on 2017-08-14.
  */
@@ -54,16 +48,18 @@ class LightsFragment : Fragment(), LightsInteractor.View {
         val layoutManager = LinearLayoutManager(context)
         lightsListView.layoutManager = layoutManager
         lightsListView.adapter = lightsAdapter
-
     }
 
-    override fun updateLights(lights: List<Light>) {
+    override fun setLights(lights: List<Light>) {
         lightsAdapter.clearLights()
         lights.sortedBy { it.name }.forEach {  light ->
             lightsAdapter.addLight(light)
         }
         lightsAdapter.notifyDataSetChanged()
-        refreshView!!.isRefreshing = false
+    }
+
+    override fun setRefreshing(isRefreshing: Boolean) {
+        refreshView.isRefreshing = isRefreshing
     }
 
 }

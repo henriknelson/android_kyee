@@ -9,7 +9,8 @@ import nu.cliffords.kyee.classes.Light
 interface LightsInteractor {
 
     interface View {
-        fun updateLights(lights: List<Light>)
+        fun setLights(lights: List<Light>)
+        fun setRefreshing(isRefreshing: Boolean)
     }
 
     interface UserActionsListener {
