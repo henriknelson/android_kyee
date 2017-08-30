@@ -3,7 +3,7 @@ package nu.cliffords.android_kyee.app
 import dagger.Module
 import dagger.Provides
 import nu.cliffords.android_kyee.database.FlowDatabase
-import nu.cliffords.android_kyee.interfaces.FlowInteractor
+import nu.cliffords.android_kyee.interfaces.FlowContract
 import nu.cliffords.android_kyee.models.FlowInteractorImpl
 
 /**
@@ -11,11 +11,9 @@ import nu.cliffords.android_kyee.models.FlowInteractorImpl
  */
 
 @Module
-class FlowModule(val app: App) {
+class FlowModule{
     @Provides
-    fun providesFlowInteractor(): FlowInteractor.UserActionsListener {
-        val context = app.applicationContext
-        val flowDao = FlowDatabase.getDatabase(context).flowDao()
-        return FlowInteractorImpl(flowDao)
+    fun providesFlowInteractor(): FlowContract.UserActionsListener {
+        return FlowInteractorImpl()
     }
 }

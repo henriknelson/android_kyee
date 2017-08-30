@@ -12,7 +12,6 @@ class App : Application() {
                 .builder()
                 .appModule(AppModule(this))
                 .flowsModule(FlowsModule(this))
-                .flowModule(FlowModule(this))
                 .build()
     }
 

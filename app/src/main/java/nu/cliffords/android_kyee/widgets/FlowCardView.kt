@@ -6,10 +6,14 @@ import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import android.widget.TextView
+import kotlinx.android.synthetic.main.card_flow_view.view.*
 import nu.cliffords.android_kyee.R
 import nu.cliffords.android_kyee.database.Flow
 import nu.cliffords.android_kyee.fragments.FlowFragment
+import nu.cliffords.android_kyee.presenters.FlowPresenter
+import nu.cliffords.android_kyee.presenters.LightPresenter
 import nu.cliffords.android_kyee.util.Helpers
+import javax.inject.Inject
 
 /**
  * Created by Henrik Nelson on 2017-08-18.
@@ -17,10 +21,15 @@ import nu.cliffords.android_kyee.util.Helpers
 
 class FlowCardView(context: Context) : RelativeLayout(context){
 
-    private var nameView: TextView? = null
-    private var editFlowButton: RoundButton? = null
     private var removeFlowButton: RoundButton? = null
     private var flow: Flow? = null
+
+    private var presenter: FlowPresenter? = null
+
+    @Inject
+    fun setPresenter(presenter: FlowPresenter) {
+        this.presenter = presenter
+    }
 
     init {
         LayoutInflater.from(context).inflate(R.layout.card_flow_view,this,true)
@@ -32,12 +41,11 @@ class FlowCardView(context: Context) : RelativeLayout(context){
     }
 
     private fun updateGUI() {
-        nameView = rootView.findViewById(R.id.flowNameText)
-        nameView?.text = flow!!.name
+        flowNameText.text = flow!!.name
 
-        editFlowButton = rootView.findViewById(R.id.editFlowButton)
-        editFlowButton?.setOnClickListener { val flowFragment: Fragment = Helpers.instanceOf<FlowFragment>("id" to flow!!.id)
-        (context as AppCompatActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container,flowFragment).addToBackStack("flow_fragment").commit()
+        editFlowButton.setOnClickListener {
+            val flowFragment: Fragment = Helpers.instanceOf<FlowFragment>("id" to flow!!.id)
+            (context as AppCompatActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container,flowFragment).addToBackStack("flow_fragment").commit()
         }
 
         removeFlowButton = rootView.findViewById(R.id.removeFlowButton)

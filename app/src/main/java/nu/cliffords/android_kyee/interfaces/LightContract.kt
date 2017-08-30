@@ -7,7 +7,7 @@ import nu.cliffords.kyee.classes.Light
  * Created by Henrik Nelson on 2017-08-21.
  */
 
-interface LightInteractor {
+interface LightContract {
 
     interface View {
         fun setName(name: String)

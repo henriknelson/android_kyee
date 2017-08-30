@@ -2,7 +2,7 @@ package nu.cliffords.android_kyee.app
 
 import dagger.Module
 import dagger.Provides
-import nu.cliffords.android_kyee.interfaces.LightsInteractor
+import nu.cliffords.android_kyee.interfaces.LightsContract
 import nu.cliffords.android_kyee.models.LightsInteractorImpl
 
 /**
@@ -12,7 +12,7 @@ import nu.cliffords.android_kyee.models.LightsInteractorImpl
 @Module
 class LightsModule {
     @Provides
-    fun providesLightsInteractor(): LightsInteractor.UserActionsListener {
+    fun providesLightsInteractor(): LightsContract.UserActionsListener {
         return LightsInteractorImpl()
     }
 }

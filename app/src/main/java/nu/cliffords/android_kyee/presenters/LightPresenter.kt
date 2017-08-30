@@ -1,6 +1,6 @@
 package nu.cliffords.android_kyee.presenters
 
-import nu.cliffords.android_kyee.interfaces.LightInteractor
+import nu.cliffords.android_kyee.interfaces.LightContract
 import nu.cliffords.android_kyee.util.Helpers
 import nu.cliffords.kyee.classes.Flow
 import nu.cliffords.kyee.classes.Light
@@ -11,7 +11,7 @@ import javax.inject.Inject
  * Created by Henrik Nelson on 2017-08-21.
  */
 
-class LightPresenter @Inject constructor (private val interactor: LightInteractor.UserActionsListener): BasePresenter<LightInteractor.View>(), LightStateChangeListener{
+class LightPresenter @Inject constructor (private val interactor: LightContract.UserActionsListener): BasePresenter<LightContract.View>(), LightStateChangeListener{
 
     private var light: Light? = null
 

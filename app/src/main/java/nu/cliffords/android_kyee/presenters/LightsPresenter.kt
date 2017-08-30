@@ -1,9 +1,10 @@
 package nu.cliffords.android_kyee.presenters
 
-import nu.cliffords.android_kyee.interfaces.LightsInteractor
+import nu.cliffords.android_kyee.interfaces.LightsContract
+import nu.cliffords.kyee.classes.Light
 import javax.inject.Inject
 
-class LightsPresenter @Inject constructor (private val interactor: LightsInteractor.UserActionsListener): BasePresenter<LightsInteractor.View>(){
+class LightsPresenter @Inject constructor (private val interactor: LightsContract.UserActionsListener): BasePresenter<LightsContract.View>(){
 
     fun discoverLights(timeout: Int) {
         view?.setRefreshing(true)
@@ -12,6 +13,4 @@ class LightsPresenter @Inject constructor (private val interactor: LightsInterac
             view?.setRefreshing(false)
         },timeout)
     }
-
-
 }

@@ -6,10 +6,10 @@ import nu.cliffords.android_kyee.widgets.LightCardView
 import nu.cliffords.kyee.classes.Light
 
 /**
- * Created by Henrik Nelson on 2017-08-11.
+ * Created by Henrik Nelson on 2017-08-30.
  */
 
-class LightsAdapter : RecyclerView.Adapter<LightsAdapter.ViewHolder>() {
+class LightsAdapter: RecyclerView.Adapter<LightsAdapter.ViewHolder>() {
 
     private val lightsList: MutableList<Light> = mutableListOf()
 
@@ -39,8 +39,6 @@ class LightsAdapter : RecyclerView.Adapter<LightsAdapter.ViewHolder>() {
         fun bindLight(light: Light) {
             with(light) {
                 lightView.setLight(light)
-                //light.registerStateListener(lightView)
-                //lightView.setLight(light)
             }
         }
     }

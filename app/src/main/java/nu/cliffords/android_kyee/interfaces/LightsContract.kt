@@ -6,7 +6,7 @@ import nu.cliffords.kyee.classes.Light
  * Created by Henrik Nelson on 2017-08-24.
  */
 
-interface LightsInteractor {
+interface LightsContract {
 
     interface View {
         fun setLights(lights: List<Light>)

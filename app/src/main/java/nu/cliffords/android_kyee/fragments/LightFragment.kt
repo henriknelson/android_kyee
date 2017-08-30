@@ -16,8 +16,8 @@ import kotlinx.android.synthetic.main.fragment_light.*
 import nu.cliffords.android_kyee.R
 import nu.cliffords.android_kyee.app.App
 import nu.cliffords.android_kyee.database.Flow
-import nu.cliffords.android_kyee.interfaces.FlowsInteractor
-import nu.cliffords.android_kyee.interfaces.LightInteractor
+import nu.cliffords.android_kyee.interfaces.FlowsContract
+import nu.cliffords.android_kyee.interfaces.LightContract
 import nu.cliffords.android_kyee.presenters.FlowsPresenter
 import nu.cliffords.android_kyee.presenters.LightPresenter
 import nu.cliffords.android_kyee.widgets.FlowCardPlayView
@@ -29,7 +29,7 @@ import javax.inject.Inject
  * Created by Henrik Nelson on 2017-08-17.
  */
 
-class LightFragment : Fragment(), LightInteractor.View, FlowsInteractor.View {
+class LightFragment : Fragment(), LightContract.View, FlowsContract.View {
 
     private var lightPresenter: LightPresenter? = null
     private var flowsPresenter: FlowsPresenter? = null
@@ -149,10 +149,6 @@ class LightFragment : Fragment(), LightInteractor.View, FlowsInteractor.View {
 
     //Flows
 
-    override fun clearFlows() {
-        light_card_detail_flowList.removeAllViews()
-    }
-
     override fun setFlows(flows: List<Flow>) {
         flows.forEach { flow ->
             val flowPlayView = FlowCardPlayView(context, flow, {
@@ -164,6 +160,19 @@ class LightFragment : Fragment(), LightInteractor.View, FlowsInteractor.View {
             light_card_detail_flowList.addView(flowPlayView)
         }
     }
+
+    override fun openFlowDetails(flow: Flow) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onFlowRemoved() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun clearFlows() {
+        light_card_detail_flowList.removeAllViews()
+    }
+
 
 
 }

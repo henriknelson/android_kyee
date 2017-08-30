@@ -1,7 +1,13 @@
 package nu.cliffords.android_kyee.models
 
+import android.content.Context
 import android.graphics.Color
-import nu.cliffords.android_kyee.interfaces.LightInteractor
+import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
+import nu.cliffords.android_kyee.R
+import nu.cliffords.android_kyee.fragments.LightFragment
+import nu.cliffords.android_kyee.interfaces.LightContract
+import nu.cliffords.android_kyee.util.Helpers
 import nu.cliffords.kyee.classes.Flow
 import nu.cliffords.kyee.classes.Light
 import org.jetbrains.anko.doAsync
@@ -11,7 +17,7 @@ import org.jetbrains.anko.uiThread
  * Created by Henrik Nelson on 2017-08-29.
  */
 
-class LightInteractorImpl : LightInteractor.UserActionsListener{
+class LightCardInteractorImpl: LightContract.UserActionsListener{
 
     private var light: Light? = null
 

@@ -6,7 +6,7 @@ import javax.inject.Inject
  * Created by Henrik Nelson on 2017-08-24.
  */
 
-open class BasePresenter<T> @Inject constructor() {
+open class BasePresenter<T>() {
 
     var view: T? = null
 
@@ -17,4 +17,5 @@ open class BasePresenter<T> @Inject constructor() {
     fun unbind(){
         this.view = null
     }
+
 }
