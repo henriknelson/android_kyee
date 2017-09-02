@@ -1,4 +1,4 @@
-package nu.cliffords.android_kyee.widgets
+package nu.cliffords.android_kyee.views.light_cardview
 
 import android.content.Context
 import android.graphics.Color
@@ -12,10 +12,8 @@ import com.flask.colorpicker.builder.ColorPickerDialogBuilder
 import kotlinx.android.synthetic.main.card_light_view.view.*
 import nu.cliffords.android_kyee.R
 import nu.cliffords.android_kyee.app.App
-import nu.cliffords.android_kyee.fragments.LightFragment
-import nu.cliffords.android_kyee.interfaces.LightContract
-import nu.cliffords.android_kyee.presenters.LightPresenter
 import nu.cliffords.android_kyee.util.Helpers
+import nu.cliffords.android_kyee.views.light_fragment.LightFragment
 import nu.cliffords.kyee.classes.Light
 import javax.inject.Inject
 
@@ -23,13 +21,13 @@ import javax.inject.Inject
  * Created by Henrik Nelson on 2017-08-15.
  */
 
-class LightCardView(context: Context) : RelativeLayout(context), LightContract.View {
+class LightCardView(context: Context) : RelativeLayout(context), LightCardViewContract.View {
 
     private var cardLight: Light? = null
-    private var presenter: LightPresenter? = null
+    private var presenter: LightCardViewPresenter? = null
 
     @Inject
-    fun setPresenter(presenter: LightPresenter) {
+    fun setPresenter(presenter: LightCardViewPresenter) {
         this.presenter = presenter
     }
 
@@ -41,6 +39,7 @@ class LightCardView(context: Context) : RelativeLayout(context), LightContract.V
     }
 
     fun setupGUI() {
+
         cardLayout.isClickable = true
         cardLayout.setOnClickListener {
             val lightFragment: Fragment = Helpers.instanceOf<LightFragment>("id" to cardLight!!.id)
@@ -76,8 +75,8 @@ class LightCardView(context: Context) : RelativeLayout(context), LightContract.V
     }
 
     fun setLight(light: Light) {
-        cardLight = light
         presenter?.setLight(light)
+        cardLight = light
     }
 
     override fun setName(name: String) {
@@ -94,14 +93,6 @@ class LightCardView(context: Context) : RelativeLayout(context), LightContract.V
 
     override fun setPower(powered: Boolean) {
         light_card_toggleSwitch.isChecked = powered
-    }
-
-    override fun setFlowStarted() {
-
-    }
-
-    override fun setFlowStopped() {
-
     }
 
 }

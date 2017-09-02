@@ -1,13 +1,7 @@
-package nu.cliffords.android_kyee.models
+package nu.cliffords.android_kyee.views.light_cardview
 
-import android.content.Context
 import android.graphics.Color
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
-import nu.cliffords.android_kyee.R
-import nu.cliffords.android_kyee.fragments.LightFragment
-import nu.cliffords.android_kyee.interfaces.LightContract
-import nu.cliffords.android_kyee.util.Helpers
+import nu.cliffords.android_kyee.views.light_cardview.LightCardViewContract
 import nu.cliffords.kyee.classes.Flow
 import nu.cliffords.kyee.classes.Light
 import org.jetbrains.anko.doAsync
@@ -17,7 +11,7 @@ import org.jetbrains.anko.uiThread
  * Created by Henrik Nelson on 2017-08-29.
  */
 
-class LightCardInteractorImpl: LightContract.UserActionsListener{
+class LightCardViewInteractorImpl: LightCardViewContract.UserActionsListener{
 
     private var light: Light? = null
 
@@ -72,7 +66,7 @@ class LightCardInteractorImpl: LightContract.UserActionsListener{
         }
     }
 
-    override fun startColorFlow(count: Int, action: Light.FlowAction, states:List<Flow.FlowState>, listener: (Boolean) -> Unit) {
+    /*override fun startColorFlow(count: Int, action: Light.FlowAction, states:List<Flow.FlowState>, listener: (Boolean) -> Unit) {
         doAsync {
             light?.startColorFlow(count,action,states,{
                 uiThread {
@@ -90,6 +84,6 @@ class LightCardInteractorImpl: LightContract.UserActionsListener{
                 }
             }
         }
-    }
+    }*/
 
 }

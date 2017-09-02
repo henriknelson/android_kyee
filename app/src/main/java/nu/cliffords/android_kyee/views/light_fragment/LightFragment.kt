@@ -1,4 +1,4 @@
-package nu.cliffords.android_kyee.fragments
+package nu.cliffords.android_kyee.views.light_fragment
 
 import android.graphics.Color
 import android.os.Bundle
@@ -16,10 +16,10 @@ import kotlinx.android.synthetic.main.fragment_light.*
 import nu.cliffords.android_kyee.R
 import nu.cliffords.android_kyee.app.App
 import nu.cliffords.android_kyee.database.Flow
-import nu.cliffords.android_kyee.interfaces.FlowsContract
-import nu.cliffords.android_kyee.interfaces.LightContract
-import nu.cliffords.android_kyee.presenters.FlowsPresenter
-import nu.cliffords.android_kyee.presenters.LightPresenter
+import nu.cliffords.android_kyee.views.flows_fragment.FlowsFragmentPresenter
+import nu.cliffords.android_kyee.views.flows_fragment.FlowsFragmentContract
+import nu.cliffords.android_kyee.views.light_cardview.LightCardViewContract
+import nu.cliffords.android_kyee.views.light_cardview.LightCardViewPresenter
 import nu.cliffords.android_kyee.widgets.FlowCardPlayView
 import nu.cliffords.kyee.classes.Light
 import nu.cliffords.kyee.classes.LightManager
@@ -29,32 +29,32 @@ import javax.inject.Inject
  * Created by Henrik Nelson on 2017-08-17.
  */
 
-class LightFragment : Fragment(), LightContract.View, FlowsContract.View {
+class LightFragment : Fragment(), LightCardViewContract.View {//}, FlowsFragmentContract.View {
 
-    private var lightPresenter: LightPresenter? = null
-    private var flowsPresenter: FlowsPresenter? = null
+    private var lightPresenter: LightCardViewPresenter? = null
+    //private var flowsPresenter: FlowsFragmentPresenter? = null
 
     @Inject
-    fun setLightPresenter(presenter: LightPresenter) {
+    fun setLightPresenter(presenter: LightCardViewPresenter) {
         this.lightPresenter = presenter
     }
 
-    @Inject
-    fun setFlowsPresenter(presenter: FlowsPresenter) {
+    /*@Inject
+    fun setFlowsPresenter(presenter: FlowsFragmentPresenter) {
         this.flowsPresenter = presenter
-    }
+    }*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (activity.application as App).component.inject(this)
         lightPresenter?.bind(this)
-        flowsPresenter?.bind(this)
+        //flowsPresenter?.bind(this)
     }
 
     override fun onStop() {
         super.onStop()
         lightPresenter?.unbind()
-        flowsPresenter?.unbind()
+        //flowsPresenter?.unbind()
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -71,7 +71,7 @@ class LightFragment : Fragment(), LightContract.View, FlowsContract.View {
             if(light != null)
                 setLight(light)
         }
-        flowsPresenter?.getFlows()
+        //flowsPresenter?.getFlows()
     }
 
     private fun setupGUI() {
@@ -139,17 +139,17 @@ class LightFragment : Fragment(), LightContract.View, FlowsContract.View {
             light_card_detail_toggleSwitch.isChecked = powered
     }
 
-    override fun setFlowStarted() {
+    /*override fun setFlowStarted() {
 
     }
 
     override fun setFlowStopped() {
 
-    }
+   }*/
 
     //Flows
 
-    override fun setFlows(flows: List<Flow>) {
+    /*override fun setFlows(flows: List<Flow>) {
         flows.forEach { flow ->
             val flowPlayView = FlowCardPlayView(context, flow, {
                 //If user signals they want this flow played or stopped
@@ -171,7 +171,7 @@ class LightFragment : Fragment(), LightContract.View, FlowsContract.View {
 
     override fun clearFlows() {
         light_card_detail_flowList.removeAllViews()
-    }
+    }*/
 
 
 

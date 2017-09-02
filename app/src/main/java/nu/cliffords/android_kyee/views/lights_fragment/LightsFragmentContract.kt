@@ -1,4 +1,4 @@
-package nu.cliffords.android_kyee.interfaces
+package nu.cliffords.android_kyee.views.lights_fragment
 
 import nu.cliffords.kyee.classes.Light
 
@@ -6,7 +6,7 @@ import nu.cliffords.kyee.classes.Light
  * Created by Henrik Nelson on 2017-08-24.
  */
 
-interface LightsContract {
+interface LightsFragmentContract {
 
     interface View {
         fun setLights(lights: List<Light>)

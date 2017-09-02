@@ -1,12 +1,11 @@
-package nu.cliffords.android_kyee.models
+package nu.cliffords.android_kyee.views.lights_fragment
 
-import nu.cliffords.android_kyee.interfaces.LightsContract
 import nu.cliffords.kyee.classes.Light
 import nu.cliffords.kyee.classes.LightManager
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
-class LightsInteractorImpl: LightsContract.UserActionsListener {
+class LightsFragmentInteractorImpl: LightsFragmentContract.UserActionsListener {
 
     override fun discoverLights(listener: (List<Light>) -> Unit, timeout: Int) {
 

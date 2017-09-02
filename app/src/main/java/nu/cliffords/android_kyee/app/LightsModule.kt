@@ -2,8 +2,8 @@ package nu.cliffords.android_kyee.app
 
 import dagger.Module
 import dagger.Provides
-import nu.cliffords.android_kyee.interfaces.LightsContract
-import nu.cliffords.android_kyee.models.LightsInteractorImpl
+import nu.cliffords.android_kyee.views.lights_fragment.LightsFragmentContract
+import nu.cliffords.android_kyee.views.lights_fragment.LightsFragmentInteractorImpl
 
 /**
  * Created by Henrik Nelson on 2017-08-24.
@@ -12,7 +12,7 @@ import nu.cliffords.android_kyee.models.LightsInteractorImpl
 @Module
 class LightsModule {
     @Provides
-    fun providesLightsInteractor(): LightsContract.UserActionsListener {
-        return LightsInteractorImpl()
+    fun providesLightsFragmentInteractor(): LightsFragmentContract.UserActionsListener {
+        return LightsFragmentInteractorImpl()
     }
 }

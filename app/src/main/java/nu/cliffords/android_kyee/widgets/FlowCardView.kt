@@ -5,13 +5,11 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
-import android.widget.TextView
 import kotlinx.android.synthetic.main.card_flow_view.view.*
 import nu.cliffords.android_kyee.R
 import nu.cliffords.android_kyee.database.Flow
-import nu.cliffords.android_kyee.fragments.FlowFragment
+import nu.cliffords.android_kyee.views.FlowFragment
 import nu.cliffords.android_kyee.presenters.FlowPresenter
-import nu.cliffords.android_kyee.presenters.LightPresenter
 import nu.cliffords.android_kyee.util.Helpers
 import javax.inject.Inject
 

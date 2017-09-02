@@ -1,8 +1,7 @@
-package nu.cliffords.android_kyee.presenters
+package nu.cliffords.android_kyee.views.light_cardview
 
-import nu.cliffords.android_kyee.interfaces.LightContract
+import nu.cliffords.android_kyee.presenters.BasePresenter
 import nu.cliffords.android_kyee.util.Helpers
-import nu.cliffords.kyee.classes.Flow
 import nu.cliffords.kyee.classes.Light
 import nu.cliffords.kyee.interfaces.LightStateChangeListener
 import javax.inject.Inject
@@ -11,7 +10,7 @@ import javax.inject.Inject
  * Created by Henrik Nelson on 2017-08-21.
  */
 
-class LightPresenter @Inject constructor (private val interactor: LightContract.UserActionsListener): BasePresenter<LightContract.View>(), LightStateChangeListener{
+class LightCardViewPresenter @Inject constructor (private val interactor: LightCardViewContract.UserActionsListener): BasePresenter<LightCardViewContract.View>(), LightStateChangeListener{
 
     private var light: Light? = null
 
@@ -46,7 +45,7 @@ class LightPresenter @Inject constructor (private val interactor: LightContract.
         })
     }
 
-    fun startColorFlow(count: Int, action: Light.FlowAction, states:List<Flow.FlowState>) {
+    /*fun startColorFlow(count: Int, action: Light.FlowAction, states:List<Flow.FlowState>) {
         interactor.startColorFlow(count,action,states,{
             view?.setFlowStarted()
         })
@@ -56,7 +55,7 @@ class LightPresenter @Inject constructor (private val interactor: LightContract.
         interactor.stopColorFlow {
             view?.setFlowStopped()
         }
-    }
+    }*/
 
     private fun updateView() {
         if(light!=null) {

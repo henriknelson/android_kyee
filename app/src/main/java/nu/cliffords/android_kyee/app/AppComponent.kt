@@ -1,11 +1,11 @@
 package nu.cliffords.android_kyee.app
 
 import dagger.Component
-import nu.cliffords.android_kyee.fragments.FlowFragment
-import nu.cliffords.android_kyee.fragments.FlowsFragment
-import nu.cliffords.android_kyee.fragments.LightFragment
-import nu.cliffords.android_kyee.fragments.LightsFragment
-import nu.cliffords.android_kyee.widgets.LightCardView
+import nu.cliffords.android_kyee.views.FlowFragment
+import nu.cliffords.android_kyee.views.flows_fragment.FlowsFragment
+import nu.cliffords.android_kyee.views.light_fragment.LightFragment
+import nu.cliffords.android_kyee.views.lights_fragment.LightsFragment
+import nu.cliffords.android_kyee.views.light_cardview.LightCardView
 import javax.inject.Singleton
 
 /**

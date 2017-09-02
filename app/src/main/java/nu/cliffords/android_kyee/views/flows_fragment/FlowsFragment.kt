@@ -1,4 +1,4 @@
-package nu.cliffords.android_kyee.fragments
+package nu.cliffords.android_kyee.views.flows_fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -14,9 +14,8 @@ import kotlinx.android.synthetic.main.fragment_flows.*
 import nu.cliffords.android_kyee.R
 import nu.cliffords.android_kyee.app.App
 import nu.cliffords.android_kyee.database.Flow
-import nu.cliffords.android_kyee.interfaces.FlowsContract
-import nu.cliffords.android_kyee.presenters.FlowsPresenter
 import nu.cliffords.android_kyee.util.Helpers
+import nu.cliffords.android_kyee.views.FlowFragment
 import nu.cliffords.android_kyee.widgets.RoundButton
 import org.jetbrains.anko.find
 import javax.inject.Inject
@@ -26,14 +25,14 @@ import javax.inject.Inject
  * Created by Henrik Nelson on 2017-08-18.
  */
 
-class FlowsFragment : Fragment(), FlowsContract.View {
+class FlowsFragment : Fragment(), FlowsFragmentContract.View {
 
     private var mListAdapter: FlowsAdapter? = null
-    private var mPresenter: FlowsPresenter? = null
+    private var mPresenter: FlowsFragmentPresenter? = null
 
     //region Dagger injections
     @Inject
-    fun setPresenter(presenter: FlowsPresenter) {
+    fun setPresenter(presenter: FlowsFragmentPresenter) {
         this.mPresenter = presenter
     }
     //endregion
@@ -66,7 +65,7 @@ class FlowsFragment : Fragment(), FlowsContract.View {
         flowsListView.layoutManager = LinearLayoutManager(context)
         flowsListView.adapter = mListAdapter
         fab?.setOnClickListener {
-            fragmentManager.beginTransaction().replace(R.id.frame_container,FlowFragment()).addToBackStack("flow_fragment").commit()
+            fragmentManager.beginTransaction().replace(R.id.frame_container, FlowFragment()).addToBackStack("flow_fragment").commit()
         }
     }
     //endregion
@@ -135,7 +134,7 @@ class FlowsFragment : Fragment(), FlowsContract.View {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val inflater = LayoutInflater.from(parent?.getContext())
             val rowView = inflater.inflate(R.layout.card_flow_view, parent, false)
-            return ViewHolder(rowView,flowItemListener)
+            return ViewHolder(rowView, flowItemListener)
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {

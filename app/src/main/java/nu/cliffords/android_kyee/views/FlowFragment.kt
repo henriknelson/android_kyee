@@ -1,4 +1,4 @@
-package nu.cliffords.android_kyee.fragments
+package nu.cliffords.android_kyee.views
 
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
