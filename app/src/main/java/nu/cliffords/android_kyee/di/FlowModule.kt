@@ -1,9 +1,8 @@
-package nu.cliffords.android_kyee.app
+package nu.cliffords.android_kyee.di
 
 import dagger.Module
 import dagger.Provides
-import nu.cliffords.android_kyee.database.FlowDatabase
-import nu.cliffords.android_kyee.interfaces.FlowContract
+import nu.cliffords.android_kyee.contracts.FlowContract
 import nu.cliffords.android_kyee.models.FlowInteractorImpl
 
 /**

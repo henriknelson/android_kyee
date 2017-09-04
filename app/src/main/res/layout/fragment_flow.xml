@@ -21,7 +21,7 @@
             android:layout_marginTop="8dp">
 
             <EditText
-                android:id="@+id/input_name"
+                android:id="@+id/nameInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Flow name"
@@ -36,7 +36,7 @@
             android:layout_marginTop="8dp">
 
             <EditText
-                android:id="@+id/input_count"
+                android:id="@+id/countInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Count"
@@ -58,7 +58,7 @@
                 style="@style/InputLabel" />
 
             <Spinner
-                android:id="@+id/spinner_flow_actions"
+                android:id="@+id/actionSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:entries="@array/flow_actions"/>
@@ -106,7 +106,7 @@
     </LinearLayout>
 
     <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_save"
+        android:id="@+id/saveButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

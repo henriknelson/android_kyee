@@ -1,4 +1,4 @@
-package nu.cliffords.android_kyee.views.light_cardview
+package nu.cliffords.android_kyee.views
 
 import android.content.Context
 import android.graphics.Color
@@ -11,9 +11,10 @@ import com.flask.colorpicker.ColorPickerView
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder
 import kotlinx.android.synthetic.main.card_light_view.view.*
 import nu.cliffords.android_kyee.R
-import nu.cliffords.android_kyee.app.App
+import nu.cliffords.android_kyee.di.App
+import nu.cliffords.android_kyee.contracts.LightContract
+import nu.cliffords.android_kyee.presenters.LightPresenter
 import nu.cliffords.android_kyee.util.Helpers
-import nu.cliffords.android_kyee.views.light_fragment.LightFragment
 import nu.cliffords.kyee.classes.Light
 import javax.inject.Inject
 
@@ -21,13 +22,13 @@ import javax.inject.Inject
  * Created by Henrik Nelson on 2017-08-15.
  */
 
-class LightCardView(context: Context) : RelativeLayout(context), LightCardViewContract.View {
+class LightCardView(context: Context) : RelativeLayout(context), LightContract.View {
 
     private var cardLight: Light? = null
-    private var presenter: LightCardViewPresenter? = null
+    private var presenter: LightPresenter? = null
 
     @Inject
-    fun setPresenter(presenter: LightCardViewPresenter) {
+    fun setPresenter(presenter: LightPresenter) {
         this.presenter = presenter
     }
 
@@ -93,6 +94,14 @@ class LightCardView(context: Context) : RelativeLayout(context), LightCardViewCo
 
     override fun setPower(powered: Boolean) {
         light_card_toggleSwitch.isChecked = powered
+    }
+
+    override fun setFlowPlaying() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun setFlowStopped() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 }

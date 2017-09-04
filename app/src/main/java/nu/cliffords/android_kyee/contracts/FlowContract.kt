@@ -1,6 +1,4 @@
-package nu.cliffords.android_kyee.interfaces
-
-import nu.cliffords.kyee.classes.Flow
+package nu.cliffords.android_kyee.contracts
 
 /**
  * Created by Henrik Nelson on 2017-08-29.

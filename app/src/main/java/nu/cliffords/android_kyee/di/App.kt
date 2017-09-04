@@ -1,4 +1,4 @@
-package nu.cliffords.android_kyee.app
+package nu.cliffords.android_kyee.di
 
 import android.app.Application
 

@@ -1,6 +1,6 @@
 package nu.cliffords.android_kyee.presenters
 
-import nu.cliffords.android_kyee.interfaces.FlowContract
+import nu.cliffords.android_kyee.contracts.FlowContract
 import nu.cliffords.kyee.classes.Flow
 import javax.inject.Inject
 

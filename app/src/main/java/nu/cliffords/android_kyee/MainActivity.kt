@@ -1,5 +1,6 @@
 package nu.cliffords.android_kyee
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
@@ -9,8 +10,10 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import nu.cliffords.android_kyee.views.AboutFragment
-import nu.cliffords.android_kyee.views.flows_fragment.FlowsFragment
-import nu.cliffords.android_kyee.views.lights_fragment.LightsFragment
+import nu.cliffords.android_kyee.views.FlowsFragment
+import nu.cliffords.android_kyee.views.LightsFragment
+import nu.cliffords.android_kyee.views.MainFragment
+
 
 
 
@@ -19,9 +22,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setupToolbar()
+        setupDrawer()
+        supportFragmentManager.beginTransaction().replace(R.id.frame_container, MainFragment()).commit()
+    }
 
+    fun setupToolbar() {
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        val myTypeface = Typeface.createFromAsset(assets, "fonts/raleway_light.ttf")
+        toolbar_title.setTypeface(myTypeface)
+    }
 
+    fun setupDrawer() {
         val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
@@ -36,8 +49,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 nav_view.menu.getItem(0).isChecked = true
             }
         }
-
-        supportFragmentManager.beginTransaction().replace(R.id.frame_container, LightsFragment()).commit()
     }
 
     override fun onBackPressed() {

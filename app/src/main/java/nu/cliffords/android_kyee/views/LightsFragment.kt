@@ -1,8 +1,7 @@
-package nu.cliffords.android_kyee.views.lights_fragment
+package nu.cliffords.android_kyee.views
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -10,8 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_lights.*
 import nu.cliffords.android_kyee.R
-import nu.cliffords.android_kyee.app.App
-import nu.cliffords.android_kyee.views.light_cardview.LightCardView
+import nu.cliffords.android_kyee.contracts.LightsContract
+import nu.cliffords.android_kyee.di.App
+import nu.cliffords.android_kyee.presenters.LightsPresenter
 import nu.cliffords.kyee.classes.Light
 import javax.inject.Inject
 
@@ -20,14 +20,14 @@ import javax.inject.Inject
  * Created by Henrik Nelson on 2017-08-14.
  */
 
-class LightsFragment : Fragment(), LightsFragmentContract.View {
+class LightsFragment : Fragment(), LightsContract.View {
 
     private var mListAdapter: LightsAdapter? = LightsAdapter()
-    private var mPresenter: LightsFragmentPresenter? = null
+    private var mPresenter: LightsPresenter? = null
 
     //region Dagger injections
     @Inject
-    fun setPresenter(presenter: LightsFragmentPresenter) {
+    fun setPresenter(presenter: LightsPresenter) {
         this.mPresenter = presenter
     }
     //endregion
@@ -54,7 +54,6 @@ class LightsFragment : Fragment(), LightsFragmentContract.View {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar!!.title = "Lights"
         refreshView.setOnRefreshListener {
             mPresenter?.discoverLights(timeout=2)
         }

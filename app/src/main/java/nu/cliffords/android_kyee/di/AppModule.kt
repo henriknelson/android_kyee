@@ -1,4 +1,4 @@
-package nu.cliffords.android_kyee.app
+package nu.cliffords.android_kyee.di
 
 import dagger.Module
 import dagger.Provides

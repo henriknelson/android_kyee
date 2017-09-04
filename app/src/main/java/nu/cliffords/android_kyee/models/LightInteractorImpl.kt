@@ -1,7 +1,7 @@
-package nu.cliffords.android_kyee.views.light_cardview
+package nu.cliffords.android_kyee.models
 
 import android.graphics.Color
-import nu.cliffords.android_kyee.views.light_cardview.LightCardViewContract
+import nu.cliffords.android_kyee.contracts.LightContract
 import nu.cliffords.kyee.classes.Flow
 import nu.cliffords.kyee.classes.Light
 import org.jetbrains.anko.doAsync
@@ -11,7 +11,7 @@ import org.jetbrains.anko.uiThread
  * Created by Henrik Nelson on 2017-08-29.
  */
 
-class LightCardViewInteractorImpl: LightCardViewContract.UserActionsListener{
+open class LightInteractorImpl : LightContract.UserActionsListener{
 
     private var light: Light? = null
 
@@ -66,7 +66,7 @@ class LightCardViewInteractorImpl: LightCardViewContract.UserActionsListener{
         }
     }
 
-    /*override fun startColorFlow(count: Int, action: Light.FlowAction, states:List<Flow.FlowState>, listener: (Boolean) -> Unit) {
+    override fun startColorFlow(count: Int, action: Light.FlowAction, states:List<Flow.FlowState>, listener: (Boolean) -> Unit) {
         doAsync {
             light?.startColorFlow(count,action,states,{
                 uiThread {
@@ -84,6 +84,6 @@ class LightCardViewInteractorImpl: LightCardViewContract.UserActionsListener{
                 }
             }
         }
-    }*/
+    }
 
 }

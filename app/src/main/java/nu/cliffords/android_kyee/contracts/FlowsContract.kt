@@ -1,4 +1,4 @@
-package nu.cliffords.android_kyee.views.flows_fragment
+package nu.cliffords.android_kyee.contracts
 
 import nu.cliffords.android_kyee.database.Flow
 
@@ -6,7 +6,7 @@ import nu.cliffords.android_kyee.database.Flow
  * Created by Henrik Nelson on 2017-08-26.
  */
 
-interface FlowsFragmentContract {
+interface FlowsContract {
 
     interface View {
         fun clearFlows()

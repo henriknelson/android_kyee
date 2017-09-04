@@ -1,4 +1,4 @@
-package nu.cliffords.android_kyee.views.flows_fragment
+package nu.cliffords.android_kyee.views
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -12,10 +12,11 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.fragment_flow.*
 import kotlinx.android.synthetic.main.fragment_flows.*
 import nu.cliffords.android_kyee.R
-import nu.cliffords.android_kyee.app.App
+import nu.cliffords.android_kyee.contracts.FlowsContract
 import nu.cliffords.android_kyee.database.Flow
+import nu.cliffords.android_kyee.di.App
+import nu.cliffords.android_kyee.presenters.FlowsPresenter
 import nu.cliffords.android_kyee.util.Helpers
-import nu.cliffords.android_kyee.views.FlowFragment
 import nu.cliffords.android_kyee.widgets.RoundButton
 import org.jetbrains.anko.find
 import javax.inject.Inject
@@ -25,14 +26,14 @@ import javax.inject.Inject
  * Created by Henrik Nelson on 2017-08-18.
  */
 
-class FlowsFragment : Fragment(), FlowsFragmentContract.View {
+class FlowsFragment : Fragment(), FlowsContract.View {
 
     private var mListAdapter: FlowsAdapter? = null
-    private var mPresenter: FlowsFragmentPresenter? = null
+    private var mPresenter: FlowsPresenter? = null
 
     //region Dagger injections
     @Inject
-    fun setPresenter(presenter: FlowsFragmentPresenter) {
+    fun setPresenter(presenter: FlowsPresenter) {
         this.mPresenter = presenter
     }
     //endregion
@@ -61,7 +62,6 @@ class FlowsFragment : Fragment(), FlowsFragmentContract.View {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar!!.title = "Flows"
         flowsListView.layoutManager = LinearLayoutManager(context)
         flowsListView.adapter = mListAdapter
         fab?.setOnClickListener {
