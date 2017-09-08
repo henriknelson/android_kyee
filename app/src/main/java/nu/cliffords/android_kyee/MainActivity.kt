@@ -6,6 +6,7 @@ import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -13,8 +14,7 @@ import nu.cliffords.android_kyee.views.AboutFragment
 import nu.cliffords.android_kyee.views.FlowsFragment
 import nu.cliffords.android_kyee.views.LightsFragment
 import nu.cliffords.android_kyee.views.MainFragment
-
-
+import org.jetbrains.anko.toast
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -65,6 +65,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.overflow_menu, menu)
+        return true
+    }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
@@ -79,6 +84,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
         }
         drawer_layout.closeDrawer(GravityCompat.START)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        toast("Kisskorv!")
         return true
     }
 }

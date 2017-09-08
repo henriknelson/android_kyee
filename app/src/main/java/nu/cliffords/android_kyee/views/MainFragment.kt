@@ -5,10 +5,11 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.app_bar_main.*
+import com.astuetz.PagerSlidingTabStrip
 import kotlinx.android.synthetic.main.fragment_main.*
 import nu.cliffords.android_kyee.R
 
@@ -29,10 +30,22 @@ class MainFragment: Fragment() {
         pagerAdapter.addFragment("Lights",LightsFragment())
         pagerAdapter.addFragment("Flows",FlowsFragment())
         fragmentMainPager.adapter = pagerAdapter
-        tabSlider.indicatorHeight = 2
-        tabSlider.setAllCaps(true)
-        tabSlider.shouldExpand = true
+        val tabSlider = getTabSlider()
+        setupTabSlider(tabSlider)
         tabSlider.setViewPager(fragmentMainPager)
+    }
+
+    fun getTabSlider(): PagerSlidingTabStrip {
+        return (activity as AppCompatActivity).findViewById<PagerSlidingTabStrip>(R.id.tabSlider)
+    }
+
+    fun setupTabSlider(tabSlider: PagerSlidingTabStrip) {
+        tabSlider.shouldExpand = true
+        tabSlider.setAllCaps(true)
+        tabSlider.indicatorHeight = 10
+        val accentColor =  getResources().getColor(R.color.colorAccent,null);
+        tabSlider.indicatorColor = accentColor
+        tabSlider.textColor = accentColor
     }
 
     class MainPagerAdapter(fm: FragmentManager): FragmentPagerAdapter(fm){
