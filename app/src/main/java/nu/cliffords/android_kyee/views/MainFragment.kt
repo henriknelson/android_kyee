@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
@@ -12,13 +13,14 @@ import android.view.ViewGroup
 import com.astuetz.PagerSlidingTabStrip
 import kotlinx.android.synthetic.main.fragment_main.*
 import nu.cliffords.android_kyee.R
+import android.widget.TextView
+import org.jetbrains.anko.childrenSequence
 
 /**
- * Created by henrik on 2017-09-03.
+ * Created by Henrik Nelson on 2017-09-03.
  */
-class MainFragment: Fragment() {
 
-    var actionBar: ActionBar? = null
+class MainFragment: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater?.inflate(R.layout.fragment_main, container, false)
@@ -26,13 +28,21 @@ class MainFragment: Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        val pagerAdapter = getPagerAdapter()
+        fragmentMainPager.adapter = pagerAdapter
+        val tabSlider = getTabSlider()
+        tabSlider.setViewPager(fragmentMainPager)
+        setupTabSlider(tabSlider)
+        tabSlider.shouldExpand = true
+        tabSlider.setAllCaps(true)
+        tabSlider.indicatorHeight = 10
+    }
+
+    fun getPagerAdapter() : MainPagerAdapter {
         val pagerAdapter = MainPagerAdapter(childFragmentManager)
         pagerAdapter.addFragment("Lights",LightsFragment())
         pagerAdapter.addFragment("Flows",FlowsFragment())
-        fragmentMainPager.adapter = pagerAdapter
-        val tabSlider = getTabSlider()
-        setupTabSlider(tabSlider)
-        tabSlider.setViewPager(fragmentMainPager)
+        return pagerAdapter
     }
 
     fun getTabSlider(): PagerSlidingTabStrip {
@@ -40,12 +50,25 @@ class MainFragment: Fragment() {
     }
 
     fun setupTabSlider(tabSlider: PagerSlidingTabStrip) {
-        tabSlider.shouldExpand = true
-        tabSlider.setAllCaps(true)
-        tabSlider.indicatorHeight = 10
         val accentColor =  getResources().getColor(R.color.colorAccent,null);
         tabSlider.indicatorColor = accentColor
-        tabSlider.textColor = accentColor
+
+        val childAt = tabSlider.getChildAt(0) as ViewGroup;
+        (childAt.getChildAt(0) as TextView).setTextColor(getResources().getColor(R.color.colorAccent));
+        tabSlider.setOnPageChangeListener(object:ViewPager.OnPageChangeListener {
+
+            override fun onPageSelected(position: Int) {
+                var i = 0
+                val size = childAt.getChildCount()
+                while (i < size) {
+                    (childAt.getChildAt(i) as TextView).setTextColor(if (i == position) resources.getColor(R.color.colorAccent) else resources.getColor(R.color.colorDefault))
+                    i++
+                }
+            }
+            override fun onPageScrollStateChanged(state: Int) { }
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) { }
+
+        });
     }
 
     class MainPagerAdapter(fm: FragmentManager): FragmentPagerAdapter(fm){
