@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/android_kyee.iml" filepath="$PROJECT_DIR$/android_kyee.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kYee-colorpicker/library/colorpicker.iml" filepath="$PROJECT_DIR$/kYee-colorpicker/library/colorpicker.iml" />
       <module fileurl="file://$PROJECT_DIR$/kYee-library/kYee.iml" filepath="$PROJECT_DIR$/kYee-library/kYee.iml" />
     </modules>
   </component>
