@@ -1,3 +1,6 @@
 [submodule "kYee-library"]
 	path = kYee-library
 	url = https://github.com/henriknelson/kYee.git
+[submodule "colorpicker"]
+	path = colorpicker
+	url = https://github.com/henriknelson/colorpicker.git

@@ -1,3 +1,3 @@
-include ':app', ':kYee'//, 'colorpicker'
+include ':app', ':kYee', ':kYee-colorpicker'
 project(':kYee').projectDir = new File('kYee-library')
-//project(':colorpicker').projectDir = new File('colorpicker/library')
+project(':kYee-colorpicker').projectDir = new File('colorpicker/library')
