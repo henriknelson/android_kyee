@@ -28,7 +28,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/app_name"
-                    android:textColor="#777777"
+                    android:textColor="@color/colorDefault"
                     android:textSize="19dp" />
             </android.support.v7.widget.Toolbar>
 
@@ -38,12 +38,12 @@
                 android:layout_height="48dip"
                 android:background="?attr/colorPrimary"
                 android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-                android:layout_below="@id/toolbar"/>
-                <!--app:pstsTextAllCaps="true"
-                app:pstsIndicatorHeight="2dp"
+                android:layout_below="@id/toolbar"
+                app:pstsTextAllCaps="true"
+                app:pstsIndicatorHeight="3dp"
                 app:pstsIndicatorColor="@color/colorAccent"
                 app:pstsUnderlineColor="@color/colorAccent"
-                app:pstsUnderlineHeight="1dp"-->
+                app:pstsUnderlineHeight="1dp"/>
 
         </RelativeLayout>
 

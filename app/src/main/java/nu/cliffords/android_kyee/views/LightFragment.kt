@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import android.widget.TextView
 import com.afollestad.materialdialogs.MaterialDialog
+import com.astuetz.PagerSlidingTabStrip
 import com.flask.colorpicker.ColorPickerView
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder
 import kotlinx.android.synthetic.main.fragment_light.*
@@ -69,6 +70,7 @@ class LightFragment : Fragment(), LightContract.View, FlowsContract.View {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        (activity as AppCompatActivity).findViewById<PagerSlidingTabStrip>(R.id.tabSlider).visibility = View.GONE
         (activity as AppCompatActivity).supportActionBar!!.title = "Light"
         setupGUI()
         if(arguments?.getString("id") != null) {

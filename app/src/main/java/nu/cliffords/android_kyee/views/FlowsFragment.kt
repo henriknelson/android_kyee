@@ -65,7 +65,7 @@ class FlowsFragment : Fragment(), FlowsContract.View {
         flowsListView.layoutManager = LinearLayoutManager(context)
         flowsListView.adapter = mListAdapter
         fab?.setOnClickListener {
-            fragmentManager.beginTransaction().replace(R.id.frame_container, FlowFragment()).addToBackStack("flow_fragment").commit()
+            (activity as AppCompatActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container, FlowFragment()).addToBackStack("flow_fragment").commit()
         }
     }
     //endregion

@@ -59,4 +59,5 @@ dependencies {
     kapt "android.arch.persistence.room:compiler:1.0.0-alpha1"
 
     compile project(":kYee")
+    //compile project(":colorpicker")
 }

@@ -1,20 +1,17 @@
 package nu.cliffords.android_kyee.views
 
-import android.app.ActionBar
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.astuetz.PagerSlidingTabStrip
 import kotlinx.android.synthetic.main.fragment_main.*
 import nu.cliffords.android_kyee.R
-import android.widget.TextView
-import org.jetbrains.anko.childrenSequence
+import nu.cliffords.android_kyee.adapters.CustomFragmentAdapter
 
 /**
  * Created by Henrik Nelson on 2017-09-03.
@@ -35,11 +32,12 @@ class MainFragment: Fragment() {
         setupTabSlider(tabSlider)
         tabSlider.shouldExpand = true
         tabSlider.setAllCaps(true)
-        tabSlider.indicatorHeight = 10
+        tabSlider.visibility = View.VISIBLE
     }
 
-    fun getPagerAdapter() : MainPagerAdapter {
-        val pagerAdapter = MainPagerAdapter(childFragmentManager)
+    fun getPagerAdapter() : CustomFragmentAdapter {
+        val pagerAdapter = CustomFragmentAdapter(childFragmentManager)
+        pagerAdapter.addFragment("Rooms",RoomsFragment())
         pagerAdapter.addFragment("Lights",LightsFragment())
         pagerAdapter.addFragment("Flows",FlowsFragment())
         return pagerAdapter
@@ -50,9 +48,7 @@ class MainFragment: Fragment() {
     }
 
     fun setupTabSlider(tabSlider: PagerSlidingTabStrip) {
-        val accentColor =  getResources().getColor(R.color.colorAccent,null);
-        tabSlider.indicatorColor = accentColor
-
+        tabSlider.indicatorColor = resources.getColor(R.color.colorAccent)
         val childAt = tabSlider.getChildAt(0) as ViewGroup;
         (childAt.getChildAt(0) as TextView).setTextColor(getResources().getColor(R.color.colorAccent));
         tabSlider.setOnPageChangeListener(object:ViewPager.OnPageChangeListener {
@@ -69,27 +65,6 @@ class MainFragment: Fragment() {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) { }
 
         });
-    }
-
-    class MainPagerAdapter(fm: FragmentManager): FragmentPagerAdapter(fm){
-
-        val fragments = LinkedHashMap<String,Fragment>()
-
-        fun addFragment(title: String,fragment: Fragment) {
-            fragments.put(title,fragment)
-        }
-
-        override fun getItem(position: Int): Fragment {
-            return fragments.values.elementAt(position)
-        }
-
-        override fun getCount(): Int {
-            return fragments.values.size
-        }
-
-        override fun getPageTitle(position: Int): CharSequence {
-            return fragments.keys.elementAt(position)
-        }
     }
 
 }

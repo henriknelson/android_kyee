@@ -38,16 +38,6 @@ class LightsFragment : Fragment(), LightsContract.View {
         (activity.application as App).component.inject(this)
     }
 
-    override fun onResume() {
-        super.onResume()
-        mPresenter?.bind(this)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        mPresenter?.unbind()  //prevent leaking activity in case presenter is orchestrating a long running task
-    }
-
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater?.inflate(R.layout.fragment_lights, container, false)
     }
@@ -60,6 +50,16 @@ class LightsFragment : Fragment(), LightsContract.View {
         val layoutManager = LinearLayoutManager(context)
         lightsListView.layoutManager = layoutManager
         lightsListView.adapter = mListAdapter
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mPresenter?.bind(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mPresenter?.unbind()  //prevent leaking activity in case presenter is orchestrating a long running task
     }
     //endregion
 

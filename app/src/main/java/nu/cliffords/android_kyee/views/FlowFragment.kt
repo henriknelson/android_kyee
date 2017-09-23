@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.astuetz.PagerSlidingTabStrip
 import kotlinx.android.synthetic.main.fragment_flow.*
 import nu.cliffords.android_kyee.R
 import nu.cliffords.android_kyee.database.Flow
@@ -31,6 +32,7 @@ class FlowFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        (activity as AppCompatActivity).findViewById<PagerSlidingTabStrip>(R.id.tabSlider).visibility = View.GONE
         // If this is not a new Flow, but a Flow to be modified,
         // the flows database id should be passed as an argument
         if(arguments?.getInt("id") != null) {
